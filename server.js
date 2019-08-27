@@ -9,6 +9,7 @@ let upload = multer({ dest: __dirname + "/uploads/" });
 let reloadMagic = require("./reload-magic.js");
 reloadMagic(app);
 
+//let sessions = {};
 let dbo = undefined;
 let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
@@ -49,6 +50,7 @@ app.post("/signup", upload.none(), (req, res) => {
       };
 
       let sessionId = generatedId();
+      //sessions[sessionId] = req.body.name;
       res.cookie("cookieId", sessionId);
 
       dbo
@@ -58,7 +60,7 @@ app.post("/signup", upload.none(), (req, res) => {
             console.log("/cookie error", err);
             res.send(JSON.stringify({ success: false }));
           } else {
-            let obj = { success: true, username: user.username };
+            let obj = { success: true, username: name };
             res.send(JSON.stringify(obj));
           }
         });
@@ -101,6 +103,29 @@ app.post("/login", upload.none(), (req, res) => {
         });
     } else {
       res.send(JSON.stringify({ success: false }));
+    }
+  });
+});
+
+app.post("/curlType", upload.none(), (req, res) => {
+  console.log("curlType", req.body);
+  const { pattern, texture, porosity, username } = req.body;
+  dbo.collection("cookies").findOne({ username: username }, (err, user) => {
+    if (err) {
+      console.log("/curlType error", err);
+      res.send(JSON.stringify({ success: false }));
+    } else {
+      dbo.collection("cookies").update(
+        { username: username },
+        {
+          $push: {
+            pattern: pattern,
+            texture: texture,
+            porosity: porosity
+          }
+        }
+      );
+      res.send(JSON.stringify({ success: true }));
     }
   });
 });

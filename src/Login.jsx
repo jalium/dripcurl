@@ -43,25 +43,23 @@ class UnconnectedLogin extends Component {
     }
   };
   render = () => {
-    if (this.props.authenticated === false) {
-      return (
-        <form onSubmit={this.handleSubmitLogin}>
-          <label>Username</label>
-          <input
-            id="user"
-            type="text"
-            onChange={this.handleUsernameInputChange}
-          />
-          <label>Password</label>
-          <input
-            id="password"
-            type="password"
-            onChange={this.handlePasswordInputChange}
-          />
-          <input type="submit" value="Log In" />
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={this.handleSubmitLogin}>
+        <label>Username</label>
+        <input
+          id="user"
+          type="text"
+          onChange={this.handleUsernameInputChange}
+        />
+        <label>Password</label>
+        <input
+          id="password"
+          type="password"
+          onChange={this.handlePasswordInputChange}
+        />
+        <input type="submit" value="Log In" />
+      </form>
+    );
   };
 }
 

@@ -11,9 +11,7 @@ class UnconnectedSignup extends Component {
       passwordInputSignup: ""
     };
   }
-  // componentDidMount() {
-  //   this.props.authenticated;
-  // }
+
   handleUsernameInputChange = evt => {
     console.log("username input", evt.target.value);
     this.setState({ usernameInputSignup: evt.target.value });
@@ -46,30 +44,28 @@ class UnconnectedSignup extends Component {
     if (body.success) {
       this.props.dispatch({
         type: "user",
-        user: body.username
+        username: body.username,
+        type: "login",
+        authenticated: true
       });
       this.props.history.push("/curltype");
     }
   };
 
   render = () => {
-    if (this.props.authenticated === false) {
-      return (
-        <form onSubmit={this.handleSubmitSignup}>
-          <label>Username</label>
-          <input type="text" onChange={this.handleUsernameInputChange} />
-          <label>Email</label>
-          <input type="text" onChange={this.handleEmailInputChange} />
-          <label>Password</label>
-          <input type="password" onChange={this.handlePasswordInputChange} />
-          <label>Confirm Password</label>
-          <input type="password" onChange={this.handleConfirmChangeSignup} />
-          <input type="submit" value="Sign Up" />
-        </form>
-      );
-    } else if (this.props.authenticated) {
-      return <h1>main page</h1>;
-    }
+    return (
+      <form onSubmit={this.handleSubmitSignup}>
+        <label>Username</label>
+        <input type="text" onChange={this.handleUsernameInputChange} />
+        <label>Email</label>
+        <input type="text" onChange={this.handleEmailInputChange} />
+        <label>Password</label>
+        <input type="password" onChange={this.handlePasswordInputChange} />
+        <label>Confirm Password</label>
+        <input type="password" onChange={this.handleConfirmChangeSignup} />
+        <input type="submit" value="Sign Up" />
+      </form>
+    );
   };
 }
 

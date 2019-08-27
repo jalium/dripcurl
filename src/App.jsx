@@ -11,6 +11,7 @@ import Dashboard from "./Dashboard.jsx";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {
+    //if (document.cookie === undefined) {
     return (
       <div>
         <Header />
@@ -18,8 +19,16 @@ class UnconnectedApp extends Component {
         <Footer />
       </div>
     );
+    // } else {
+    //   console.log("cookie", document.cookie);
+    return (
+      <div>
+        <Dashboard />
+      </div>
+    );
+    // }
   };
-  
+
   renderSignup = () => {
     return (
       <div>
@@ -52,6 +61,14 @@ class UnconnectedApp extends Component {
     );
   };
 
+  renderProfile = () => {
+    return (
+      <div>
+        <Profile />
+      </div>
+    )
+  }
+
   render = () => {
     return (
       <BrowserRouter>
@@ -60,6 +77,7 @@ class UnconnectedApp extends Component {
         <Route exact={true} path="/login" render={this.renderLogin} />
         <Route exact={true} path="/curltype" render={this.renderCurlType} />
         <Route exact={true} path="/dashboard" render={this.renderDashboard} />
+        <Route exact={true} path="/profile" render={this.renderProfile} />
       </BrowserRouter>
     );
   };

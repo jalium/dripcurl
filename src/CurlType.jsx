@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import StepOne from "./StepOne.jsx";
 import StepTwo from "./StepTwo.jsx";
 import StepThree from "./StepThree.jsx";
@@ -7,7 +8,7 @@ import StepThree from "./StepThree.jsx";
 class UnconnectedCurlType extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentStep: 1, pattern: "", type: "", porosity: "" };
+    this.state = { currentStep: 1, pattern: "", texture: "", porosity: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleHairType = this.handleHairType.bind(this);
     this._next = this._next.bind(this);
@@ -16,14 +17,14 @@ class UnconnectedCurlType extends Component {
 
   _next() {
     let currentStep = this.state.currentStep;
-    currentStep >= 2 ? 3 : currentStep++;
+    currentStep = currentStep >= 2 ? 3 : currentStep + 1;
     console.log(currentStep);
     this.setState({ currentStep: currentStep });
   }
 
   _prev() {
     let currentStep = this.state.currentStep;
-    currentStep <= 1 ? 1 : currentStep--;
+    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
     console.log(currentStep);
     this.setState({ currentStep: currentStep });
   }
@@ -52,6 +53,22 @@ class UnconnectedCurlType extends Component {
     return null;
   }
 
+  get submitButton() {
+    let currentStep = this.state.currentStep;
+    if (currentStep === 3) {
+      return (
+        <button
+          className="btn-submit"
+          type="submit"
+          onClick={this.handleSubmit}
+        >
+          Find your hair community
+        </button>
+      );
+    }
+    return null;
+  }
+
   handleHairType(evt) {
     evt.preventDefault();
     const { name, alt } = evt.target;
@@ -67,10 +84,32 @@ class UnconnectedCurlType extends Component {
     });
   }
 
-  handleSubmit = evt => {
+  handleSubmit = async evt => {
     evt.preventDefault();
-    const { pattern, type, porosity } = this.state;
-    console.log("selections: " + pattern, type, porosity);
+    const { pattern, texture, porosity } = this.state;
+    console.log("selections: " + pattern, texture, porosity);
+    let data = new FormData();
+    data.append("pattern", pattern);
+    data.append("texture", texture);
+    data.append("porosity", porosity);
+    data.append("username", this.props.username);
+    let response = await fetch("/curlType", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
+    let resText = await response.text();
+    console.log("/curlType response", resText);
+    let body = JSON.parse(resText);
+    if (body.success) {
+      this.props.dispatch({
+        type: "curlType",
+        pattern: pattern,
+        texture: texture,
+        porosity: porosity
+      });
+      this.props.history.push("/dashboard");
+    }
   };
 
   render() {
@@ -88,16 +127,17 @@ class UnconnectedCurlType extends Component {
             currentStep={this.state.currentStep}
             handleHairType={this.handleHairType}
             pattern={this.state.pattern}
-            type={this.state.type}
+            texture={this.state.texture}
           />
 
           <StepThree
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
-            type={this.state.porosity}
+            porosity={this.state.porosity}
           />
           {this.previousButton}
           {this.nextButton}
+          {this.submitButton}
         </form>
       </>
     );
@@ -106,8 +146,12 @@ class UnconnectedCurlType extends Component {
 
 let mapStateToProps = st => {
   return {
-    authenticated: st.authenticated
+    authenticated: st.authenticated,
+    uername: st.username,
+    pattern: st.pattern,
+    texture: st.texture,
+    porosity: st.porosity
   };
 };
 let CurlType = connect(mapStateToProps)(UnconnectedCurlType);
-export default CurlType;
+export default withRouter(CurlType);
