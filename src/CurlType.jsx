@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import StepOne from "./StepOne.jsx";
+import StepTwo from "./StepTwo.jsx";
+import StepThree from "./StepThree.jsx";
 
 class UnconnectedCurlType extends Component {
   constructor(props) {
@@ -13,14 +16,16 @@ class UnconnectedCurlType extends Component {
 
   _next() {
     let currentStep = this.state.currentStep;
-    if (currentStep >= 2 ? 3 : currentStep++)
-      this.setState({ currentStep: currentStep });
+    currentStep >= 2 ? 3 : currentStep++;
+    console.log(currentStep);
+    this.setState({ currentStep: currentStep });
   }
 
   _prev() {
     let currentStep = this.state.currentStep;
-    if (currentStep <= 1 ? 1 : currentStep--)
-      this.setState({ currentStep: currentStep });
+    currentStep <= 1 ? 1 : currentStep--;
+    console.log(currentStep);
+    this.setState({ currentStep: currentStep });
   }
 
   get previousButton() {
@@ -73,20 +78,20 @@ class UnconnectedCurlType extends Component {
       <>
         <p>Step {this.state.currentStep} </p>
         <form onSubmit={this.handleSubmit}>
-          <Step1
+          <StepOne
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
             pattern={this.state.pattern}
           />
 
-          <Step2
+          <StepTwo
             currentStep={this.state.currentStep}
             handleHairType={this.handleHairType}
             pattern={this.state.pattern}
             type={this.state.type}
           />
 
-          <Step3
+          <StepThree
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
             type={this.state.porosity}
@@ -106,125 +111,3 @@ let mapStateToProps = st => {
 };
 let CurlType = connect(mapStateToProps)(UnconnectedCurlType);
 export default CurlType;
-
-class Step1 extends Component {
-  render() {
-    if (this.props.currentStep !== 1) {
-      return null;
-    }
-    return (
-      <div className="form-group">
-        <label>How curly is your hair?</label>
-        <input
-          type="button"
-          name="pattern"
-          value="wavy"
-          onClick={this.props.handleChange}
-        />
-        <input
-          type="button"
-          name="pattern"
-          value="curly"
-          onClick={this.props.handleChange}
-        />
-        <input
-          type="button"
-          name="pattern"
-          value="coily"
-          onClick={this.props.handleChange}
-        />
-      </div>
-    );
-  }
-}
-
-class Step2 extends Component {
-  render() {
-    if (this.props.currentStep !== 2) {
-      return null;
-    } else if (this.props.pattern === "wavy") {
-      return (
-        <div className="form-group">
-          <label>Choose the photo that most ressembles your wavy hair</label>
-          <input
-            type="image"
-            name="type"
-            alt="2a"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-2-WAVY-HAIR-2A.jpg"
-          />
-          <input
-            type="image"
-            name="type"
-            alt="2b"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-2-WAVY-HAIR-2B.jpg"
-          />
-          <input
-            type="image"
-            name="type"
-            alt="2c"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-2-WAVY-HAIR-2C.jpg"
-          />
-        </div>
-      );
-    } else if (this.props.pattern === "curly") {
-      return (
-        <div className="form-group">
-          <label>Choose the photo that most ressembles your curly hair</label>
-          <input
-            type="image"
-            name="type"
-            alt="3a"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-3-CURLY-HAIR-3A.jpg"
-          />
-          <input
-            type="image"
-            name="type"
-            alt="2b"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-3-CURLY-HAIR-2B.jpg"
-          />
-          <input
-            type="image"
-            name="type"
-            alt="2c"
-            onClick={this.props.handleHairType}
-            src="/curlImages/TYPE-3-CURLY-HAIR-2C.jpg"
-          />
-        </div>
-      );
-    } else if (this.props.pattern === "coily") {
-      return (
-        <div className="form-group">
-          <label>Choose the photo that most ressembles your coily hair</label>
-          <input
-            type="image"
-            name="type"
-            id="4a"
-            src="/curlImages/TYPE-4-COILY-HAIR-4A.jpg/"
-          />
-        </div>
-      );
-    }
-  }
-}
-
-class Step3 extends Component {
-  render() {
-    if (this.props.currentStep !== 3) {
-      return null;
-    }
-    return (
-      <div className="form-group">
-        <label>How porous is your hair?</label>
-        <p>Describe high porosity</p>
-        <input type="button" name="high" value="High Porosity" />
-        <p>Describe low porosity</p>
-        <input type="button" name="low" value="Low Porosity" />
-      </div>
-    );
-  }
-}
