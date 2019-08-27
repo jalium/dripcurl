@@ -92,7 +92,7 @@ class UnconnectedCurlType extends Component {
     data.append("pattern", pattern);
     data.append("texture", texture);
     data.append("porosity", porosity);
-    data.append("username", this.props.username);
+    //data.append("username", this.props.username);
     let response = await fetch("/curlType", {
       method: "POST",
       body: data,
