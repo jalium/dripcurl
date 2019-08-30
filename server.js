@@ -15,7 +15,7 @@ let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(
   url,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: false, useUnifiedTopology: true },
   (err, db) => {
     dbo = db.db("curl");
   }
@@ -29,6 +29,7 @@ app.use("/curlImages", express.static(__dirname + "/curlImages"));
 app.use("/uploads", express.static("uploads"));
 
 app.post("/signup", upload.none(), (req, res) => {
+  console.log("POST to /signup");
   let name = req.body.username;
   let email = req.body.email;
   let pwd = req.body.password;
@@ -54,7 +55,7 @@ app.post("/signup", upload.none(), (req, res) => {
       res.cookie("cookieId", sessionId);
 
       dbo
-        .collection("cookies")
+        .collection("curlInfo")
         .insertOne({ username: name, cookie: sessionId }, (err, user) => {
           if (err) {
             console.log("/cookie error", err);
@@ -71,7 +72,13 @@ app.post("/signup", upload.none(), (req, res) => {
   });
 });
 
+// let login = (username, password) => {
+//   check if pass=username
+//   check if cookie exists, if not, make a cookie
+// }
+
 app.post("/login", upload.none(), (req, res) => {
+  console.log("POST to /login");
   console.log("login", req.body);
   let name = req.body.username;
   let pwd = req.body.password;
@@ -87,18 +94,26 @@ app.post("/login", upload.none(), (req, res) => {
     }
     if (user.password === pwd) {
       dbo
-        .collection("cookies")
-        .findOne({ cookie: req.cookies.cookieId }, (err, user) => {
+        .collection("curlInfo")
+        .findOne({ cookie: req.cookies.cookieId }, (err, info) => {
           if (err) {
             console.log("/login error", err);
             res.send(JSON.stringify({ success: false }));
           } else if (user.username) {
-            let obj = {
+            let currentUser = {
               success: true,
-              username: user.username,
-              cookie: user.cookie
+              username: info.username,
+              cookie: info.cookie,
+              pattern: info.pattern,
+              texture: info.texture,
+              porosity: info.porosity,
+              shampoo: info.shampoo,
+              conditioner: info.conditioner,
+              leaveIn: info.leaveIn,
+              treatments: info.treatments,
+              stylers: info.stylers
             };
-            res.send(JSON.stringify(obj));
+            res.send(JSON.stringify(currentUser));
           }
         });
     } else {
@@ -108,17 +123,18 @@ app.post("/login", upload.none(), (req, res) => {
 });
 
 app.post("/curlType", upload.none(), (req, res) => {
+  console.log("POST to /curlType");
   console.log("curlType", req.body);
   console.log("sessions", sessions);
   let sessionId = req.cookies.cookieId;
   let username = sessions[sessionId];
   const { pattern, texture, porosity } = req.body;
-  dbo.collection("cookies").findOne({ username: username }, (err, user) => {
+  dbo.collection("curlInfo").findOne({ username: username }, (err, info) => {
     if (err) {
       console.log("/curlType error", err);
       res.send(JSON.stringify({ success: false }));
     } else {
-      dbo.collection("cookies").updateMany(
+      dbo.collection("curlInfo").updateMany(
         { username: username },
         {
           $set: {
@@ -133,7 +149,73 @@ app.post("/curlType", upload.none(), (req, res) => {
   });
 });
 
-app.get("/");
+app.post("/editProfile", upload.none(), (req, res) => {
+  console.log("POST to editProfile");
+  console.log("editProfile", req.body);
+  let sessionId = req.cookies.cookieId;
+  let username = sessions[sessionId];
+  const { shampoo, conditioner, leaveIn, treatments, stylers } = req.body;
+  dbo.collection("curlInfo").findOne({ username: username }, (err, info) => {
+    if (err) {
+      console.log("/curlType error", err);
+      res.send(JSON.stringify({ success: false }));
+    } else {
+      dbo.collection("curlInfo").updateMany(
+        { username: username },
+        {
+          $set: {
+            shampoo: shampoo,
+            conditioner: conditioner,
+            leaveIn: leaveIn,
+            treatments: treatments,
+            stylers: stylers
+          }
+        }
+      );
+      res.send(JSON.stringify({ success: true }));
+    }
+  });
+});
+
+app.get("/dashboard", upload.none(), (req, res) => {
+  console.log("GET to /dashboard");
+
+  let userData = [];
+  let count = 0;
+
+  dbo
+    .collection("curlInfo")
+    .find({})
+    .toArray((err, files) => {
+      if (!files || files.length === 0 || err) {
+        console.log("no users");
+        res.send(JSON.stringify({ success: false }));
+      } else {
+        files.forEach(file => {
+          userData[count++] = {
+            username: file.username,
+            type: [
+              {
+                pattern: file.pattern,
+                texture: file.texture,
+                porosity: file.porosity
+              }
+            ],
+            products: [
+              {
+                shampoo: file.shampoo,
+                conditioner: file.conditioner,
+                leaveIn: file.leaveIn,
+                treatments: file.treatments,
+                stylers: file.stylers
+              }
+            ]
+          };
+        });
+        res.send(JSON.stringify(userData));
+      }
+    });
+});
 //have this main endpoint check for the cookie , to see if logged in
 // Your endpoints go before this line
 

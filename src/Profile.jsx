@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class UnconnectedProfile extends Component {
   constructor(props) {
@@ -13,12 +14,11 @@ class UnconnectedProfile extends Component {
           <Link to="/dashboard">back to Dashboard</Link>
         </div>
         <div>
-          <h3>{username}</h3>
-          <p>Hair Type: {pattern, texture, porosity}</p>
+          <h3>Username: get from back end cookie or mongo db</h3>
+          <p>Hair Type: get from mongodb</p>
         </div>
-        <div>Profile picture</div>
-        <p>Current Products</p>
-        <p>search for username</p>
+        <div>Profile picture: store filepath in mongodb</div>
+        <p>Current Products: store / update in mongodb</p>
       </>
     );
   };
@@ -26,11 +26,8 @@ class UnconnectedProfile extends Component {
 let mapStateToProps = st => {
   return {
     authenticated: st.authenticated,
-    username: st.username,
-    pattern: st.pattern,
-    texture: st.texture,
-    porosity: st.porosity
+    username: st.username
   };
 };
-let Dashboard = connect(mapStateToProps)(UnconnectedDashboard);
-export default Dashboard;
+let Profile = connect(mapStateToProps)(UnconnectedProfile);
+export default withRouter(Profile);
