@@ -31,14 +31,30 @@ class UnconnectedLogin extends Component {
     console.log("/login response ", resText);
     let body = JSON.parse(resText);
     if (body.success) {
-      this.props.dispatch(
-        {
-          type: "user",
-          user: body.username,
-          cookie: body.cookie
-        },
-        { type: "login", authenticated: true }
-      );
+      this.props.dispatch({
+        type: "user",
+        user: body.username,
+        cookie: body.cookie,
+        frontendPath: body.frontendPath
+      }),
+        this.props.dispatch({
+          type: "curlType",
+          pattern: body.pattern,
+          texture: body.texture,
+          porosity: body.porosity
+        }),
+        this.props.dispatch({
+          type: "products",
+          shampoo: body.shampoo,
+          conditioner: body.conditioner,
+          leaveIn: body.leaveIn,
+          treatments: body.treatments,
+          stylers: body.stylers
+        }),
+        this.props.dispatch({
+          type: "login",
+          authenticated: true
+        });
       this.props.history.push("/dashboard");
     }
   };
@@ -65,7 +81,18 @@ class UnconnectedLogin extends Component {
 
 let mapStateToProps = st => {
   return {
-    authenticated: st.authenticated
+    authenticated: st.authenticated,
+    username: st.username,
+    cookie: st.cookie,
+    pattern: st.pattern,
+    texture: st.texture,
+    porosity: st.porosity,
+    shampoo: st.shampoo,
+    conditioner: st.conditioner,
+    leaveIn: st.leaveIn,
+    treatments: st.treatments,
+    stylers: st.stylers,
+    frontendPath: st.frontendPath
   };
 };
 let Login = connect(mapStateToProps)(UnconnectedLogin);

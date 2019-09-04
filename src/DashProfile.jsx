@@ -6,11 +6,11 @@ class UnconnectedDashProfile extends Component {
     super(props);
     this.products = this.props.user.products.map((product, i) => (
       <ul>
-        <li>{product.shampoo}</li>
-        <li>{product.conditioner}</li>
-        <li>{product.leaveIn}</li>
-        <li>{product.stylers}</li>
-        <li>{product.treatments}</li>
+        <li>shampoo: {product.shampoo}</li>
+        <li>conditioner: {product.conditioner}</li>
+        <li>leave-in: {product.leaveIn}</li>
+        <li>styler: {product.stylers}</li>
+        <li>treatment: {product.treatments}</li>
       </ul>
     ));
   }
@@ -21,6 +21,7 @@ class UnconnectedDashProfile extends Component {
         <div>
           <div>{this.props.user.username}</div>
         </div>
+        <img height="100px" src={this.props.user.profilePic} />
         <div>
           {this.products.product !== null ? (
             <div>{this.products}</div>

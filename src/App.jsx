@@ -9,15 +9,15 @@ import Login from "./Login.jsx";
 import CurlType from "./CurlType.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Profile from "./Profile.jsx";
+import EditProfile from "./EditProfile.jsx";
+import "./Lapa.css";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {
     //if (document.cookie === undefined) {
     return (
       <div>
-        <Header />
         <Landing />
-        <Footer />
       </div>
     );
   };
@@ -43,6 +43,7 @@ class UnconnectedApp extends Component {
         <Route exact={true} path="/curltype" component={CurlType} />
         <Route exact={true} path="/dashboard" render={this.renderDashboard} />
         <Route exact={true} path="/profile" component={Profile} />
+        <Route exact={true} path="/editProfile" component={EditProfile} />
       </BrowserRouter>
     );
   };

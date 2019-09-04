@@ -1,7 +1,12 @@
 import { createStore } from "redux";
 let reducer = (state, action) => {
   if (action.type === "user") {
-    return { ...state, username: action.user };
+    return {
+      ...state,
+      username: action.user,
+      cookie: action.cookie,
+      frontendPath: action.frontendPath
+    };
   }
   if (action.type === "login") {
     return { ...state, authenticated: action.athenticated };
@@ -14,6 +19,16 @@ let reducer = (state, action) => {
       porosity: action.porosity
     };
   }
+  if (action.type === "products") {
+    return {
+      ...state,
+      shampoo: action.shampoo,
+      conditioner: action.conditioner,
+      leaveIn: action.leaveIn,
+      treatments: action.treatments,
+      stylers: action.stylers
+    };
+  }
   return state;
 };
 
@@ -22,9 +37,16 @@ const store = createStore(
   {
     username: undefined,
     authenticated: false,
+    cookie: undefined,
     pattern: "",
     texture: "",
-    porosity: ""
+    porosity: "",
+    shampoo: "",
+    conditioner: "",
+    leaveIn: "",
+    treatments: "",
+    stylers: "",
+    frontendPath: ""
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

@@ -100,6 +100,7 @@ app.post("/login", upload.none(), (req, res) => {
             console.log("/login error", err);
             res.send(JSON.stringify({ success: false }));
           } else if (user.username) {
+            sessions[info.cookie] = info.username;
             let currentUser = {
               success: true,
               username: info.username,
@@ -111,7 +112,8 @@ app.post("/login", upload.none(), (req, res) => {
               conditioner: info.conditioner,
               leaveIn: info.leaveIn,
               treatments: info.treatments,
-              stylers: info.stylers
+              stylers: info.stylers,
+              frontendPath: info.frontendPath
             };
             res.send(JSON.stringify(currentUser));
           }
@@ -149,32 +151,68 @@ app.post("/curlType", upload.none(), (req, res) => {
   });
 });
 
-app.post("/editProfile", upload.none(), (req, res) => {
+app.post("/editProfile", upload.single("profilePic"), (req, res) => {
   console.log("POST to editProfile");
-  console.log("editProfile", req.body);
   let sessionId = req.cookies.cookieId;
   let username = sessions[sessionId];
-  const { shampoo, conditioner, leaveIn, treatments, stylers } = req.body;
-  dbo.collection("curlInfo").findOne({ username: username }, (err, info) => {
-    if (err) {
-      console.log("/curlType error", err);
-      res.send(JSON.stringify({ success: false }));
-    } else {
-      dbo.collection("curlInfo").updateMany(
-        { username: username },
-        {
-          $set: {
-            shampoo: shampoo,
-            conditioner: conditioner,
-            leaveIn: leaveIn,
-            treatments: treatments,
-            stylers: stylers
+  console.log("sessions", sessions);
+  if (req.file) {
+    console.log("file", req.file);
+    let file = req.file;
+    console.log("uploaded file", file);
+    let frontendPath = "/uploads/" + file.filename;
+    dbo.collection("curlInfo").findOne({ username: username }, (err, info) => {
+      if (err) {
+        console.log("/curlType error", err);
+        res.send(JSON.stringify({ success: false }));
+      } else {
+        dbo.collection("curlInfo").updateOne(
+          { username: username },
+          {
+            $set: {
+              frontendPath: frontendPath
+            }
           }
-        }
-      );
-      res.send(JSON.stringify({ success: true }));
-    }
-  });
+        );
+        let currentUser = {
+          success: true,
+          frontendPath: frontendPath
+        };
+        res.send(JSON.stringify(currentUser));
+      }
+    });
+  } else {
+    const { shampoo, conditioner, leaveIn, treatments, stylers } = req.body;
+    console.log("editProfile", req.body);
+    dbo.collection("curlInfo").findOne({ username: username }, (err, info) => {
+      if (err) {
+        console.log("/curlType error", err);
+        res.send(JSON.stringify({ success: false }));
+      } else {
+        dbo.collection("curlInfo").updateMany(
+          { username: username },
+          {
+            $set: {
+              shampoo: shampoo,
+              conditioner: conditioner,
+              leaveIn: leaveIn,
+              treatments: treatments,
+              stylers: stylers
+            }
+          }
+        );
+        let currentUser = {
+          success: true,
+          shampoo: shampoo,
+          conditioner: conditioner,
+          leaveIn: leaveIn,
+          treatments: treatments,
+          stylers: stylers
+        };
+        res.send(JSON.stringify(currentUser));
+      }
+    });
+  }
 });
 
 app.get("/dashboard", upload.none(), (req, res) => {
@@ -194,6 +232,7 @@ app.get("/dashboard", upload.none(), (req, res) => {
         files.forEach(file => {
           userData[count++] = {
             username: file.username,
+            profilePic: file.frontendPath,
             type: [
               {
                 pattern: file.pattern,

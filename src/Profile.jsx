@@ -14,11 +14,30 @@ class UnconnectedProfile extends Component {
           <Link to="/dashboard">back to Dashboard</Link>
         </div>
         <div>
-          <h3>Username: get from back end cookie or mongo db</h3>
-          <p>Hair Type: get from mongodb</p>
+          <Link to="/editProfile">Edit Profile</Link>
         </div>
-        <div>Profile picture: store filepath in mongodb</div>
-        <p>Current Products: store / update in mongodb</p>
+        <div>
+          <h3>Hi, {this.props.username}</h3>
+          <div>
+            Hair Type:
+            <ul>
+              <li>{this.props.pattern}</li>
+              <li>{this.props.texture}</li>
+              <li>{this.props.porosity}</li>
+            </ul>
+          </div>
+        </div>
+        <img height="300px" src={this.props.frontendPath} />
+        <div>
+          Current Products:
+          <ul>
+            <li>{this.props.shampoo}</li>
+            <li>{this.props.conditioner}</li>
+            <li>{this.props.leaveIn}</li>
+            <li>{this.props.stylers}</li>
+            <li>{this.props.treatments}</li>
+          </ul>
+        </div>
       </>
     );
   };
@@ -26,7 +45,17 @@ class UnconnectedProfile extends Component {
 let mapStateToProps = st => {
   return {
     authenticated: st.authenticated,
-    username: st.username
+    username: st.username,
+    cookie: st.cookie,
+    pattern: st.pattern,
+    texture: st.texture,
+    porosity: st.porosity,
+    shampoo: st.shampoo,
+    conditioner: st.conditioner,
+    leaveIn: st.leaveIn,
+    treatments: st.treatments,
+    stylers: st.stylers,
+    frontendPath: st.frontendPath
   };
 };
 let Profile = connect(mapStateToProps)(UnconnectedProfile);
