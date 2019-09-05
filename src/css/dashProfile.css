@@ -1,0 +1,42 @@
+.dash-profile {
+  background-color: white;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 25px 25px 15px 25px;
+  transition: 0.3s;
+  max-width: 500px;
+}
+
+.dash-profile:hover {
+  box-shadow: 5px 1px 20px 1px #ddd;
+  transform: scale(0.96);
+}
+
+.dash-profile p {
+  font-family: calluna;
+  font-size: 20px;
+  text-align: center;
+}
+
+.dash-profile img {
+  height: 200px;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+
+.products {
+  padding: 20px;
+  background-color: #e0f391;
+  list-style-position: inside;
+}
+
+.products p {
+  text-align: center;
+}
+
+.products ul {
+  list-style-type: none;
+}

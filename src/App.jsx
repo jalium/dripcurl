@@ -13,6 +13,9 @@ import EditProfile from "./EditProfile.jsx";
 import "./css/Lapa.css";
 import "./css/main.css";
 import "./css/signup.css";
+import "./css/dashProfile.css";
+import "./css/dashboard.css";
+import "./css/profile.css";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {
@@ -29,9 +32,7 @@ class UnconnectedApp extends Component {
   renderDashboard = () => {
     return (
       <div>
-        <Header />
         <Dashboard />
-        <Footer />
       </div>
     );
   };

@@ -1,21 +1,44 @@
+.signup-container {
+  background-color: #e0f391;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.signup-header {
+  padding: 50px;
+  font-family: "calluna";
+  font-size: "300px";
+  text-align: center;
+}
+
 .signup {
+  position: relative;
   margin: 40px auto;
   max-width: 130px;
   font-family: "calluna";
   font-size: 16px;
-  padding: 50px 150px;
-  border-radius: 4px;
-  background: #e0f391;
+  padding: 25px 208px 47px 30px;
+  border-radius: 10px;
+  background: white;
 }
 
 .signup input {
-  margin-bottom: 20px;
-  padding: 5px;
+  display: block;
+  width: 208%;
+  padding: 20px;
+  font-family: "ransom-sans", sans-serif;
+  font-size: 14px;
+  border: 0;
+  outline: 0;
 }
 
 .signup label {
   clear: left;
   float: left;
+  width: 300px;
+  text-align: center;
   margin-bottom: 5px;
 }
 
@@ -23,4 +46,47 @@
   margin-bottom: 15px;
   font-size: 28px;
   font-weight: 800;
+}
+
+.signup input.step-one {
+  display: block;
+  width: 208%;
+  padding: 20px;
+  margin: 10px;
+  font-family: "ransom-sans", sans-serif;
+  font-size: 14px;
+  border: 0;
+  outline: 1px;
+  outline-style: solid;
+}
+
+.curl-form {
+  width: 100%;
+}
+
+.btn {
+  border-radius: 2px;
+  color: white;
+  background: black;
+}
+
+.btn-submit {
+  height: 30px;
+  border-radius: 2px;
+  color: white;
+  background: black;
+}
+
+.btn-back {
+  height: 30px;
+  border-radius: 2px;
+  color: white;
+  background: black;
+}
+
+.btn-next {
+  height: 30px;
+  border-radius: 2px;
+  color: white;
+  background: black;
 }

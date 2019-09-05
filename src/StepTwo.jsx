@@ -36,7 +36,7 @@ class StepTwo extends Component {
       );
     } else if (this.props.pattern === "curly") {
       return (
-        <div className="form-group">
+        <div>
           <label>Choose the photo that most ressembles your curly hair</label>
           <input
             type="image"
@@ -66,7 +66,7 @@ class StepTwo extends Component {
       );
     } else if (this.props.pattern === "coily") {
       return (
-        <div className="form-group">
+        <div>
           <label>Choose the photo that most ressembles your coily hair</label>
           <input
             type="image"

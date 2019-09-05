@@ -6,26 +6,39 @@ class UnconnectedDashProfile extends Component {
     super(props);
     this.products = this.props.user.products.map((product, i) => (
       <ul>
-        <li>shampoo: {product.shampoo}</li>
-        <li>conditioner: {product.conditioner}</li>
-        <li>leave-in: {product.leaveIn}</li>
-        <li>styler: {product.stylers}</li>
-        <li>treatment: {product.treatments}</li>
+        <li>
+          <b>shampoo:</b> {product.shampoo}
+        </li>
+        <li>
+          <b>conditioner:</b> {product.conditioner}
+        </li>
+        <li>
+          <b>leave-in:</b> {product.leaveIn}
+        </li>
+        <li>
+          <b>styler:</b> {product.stylers}
+        </li>
+        <li>
+          <b>treatment:</b> {product.treatments}
+        </li>
       </ul>
     ));
   }
 
   render = () => {
     return (
-      <div>
-        <div>{this.props.user.username}</div>
-        <img height="100px" src={this.props.user.profilePic} />
-        <div>
-          {this.products.product !== null ? (
-            <div>{this.products}</div>
-          ) : (
-            <div>no product listed</div>
-          )}
+      <div className="dash-profile">
+        <p>{this.props.user.username}</p>
+        <img src={this.props.user.profilePic} />
+        <div className="products">
+          {/* {this.props.user.products.map(product =>
+            product !== undefined ? ( */}
+          <p>favourite products:</p>
+          <div>{this.products}</div>
+          {/* ) : (
+              <div>no product listed</div>
+            ) */}
+          {/* )} */}
         </div>
       </div>
     );

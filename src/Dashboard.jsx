@@ -28,18 +28,26 @@ class UnconnectedDashboard extends Component {
   render = () => {
     return (
       <div>
-        <nav>
-          <Link to="/profile">Your profile</Link>
-          <p>dropdown to filter or unfilter users</p>
-          <p>search for username</p>
-        </nav>
-        <header id="browse-header">
-          <h3>
-            Scroll through profile updates from users in your hair community
-          </h3>
+        <header className="main-menu">
+          <p>Hi, {this.props.username}</p>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>all hairtypes</li>
+              <li>search for username</li>
+            </ul>
+          </nav>
         </header>
 
-        <main id="browse-profile">
+        <div className="content-outer">
+          <header className="dripcurl-logo">
+            <p>DRIPCURL</p>
+          </header>
+        </div>
+
+        <main className="browse-profile">
           {this.state.allUsers.map((user, i) => (
             <DashProfile user={user} key={i} />
           ))}

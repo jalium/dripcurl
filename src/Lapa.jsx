@@ -10,7 +10,7 @@ class UnconnectedLanding extends Component {
     return (
       <div>
         <div>
-          <header className="main-menu" /*style="transform:translateY(0vh)"*/>
+          <header className="main-menu">
             <p>
               Here to help you unleash <br /> your best curls
             </p>
@@ -33,9 +33,9 @@ class UnconnectedLanding extends Component {
           <header className="dripcurl-logo">
             <p>DRIPCURL</p>
           </header>
-          <img src="/curlImages/Image-1.png" />
-          <img src="/curlImages/Image-2.png" />
-          <img src="/curlImages/Image-3.png" />
+          <img className="Lapa-img" src="/curlImages/Image-1.png" />
+          <img className="Lapa-img" src="/curlImages/Image-2.png" />
+          <img className="Lapa-img" src="/curlImages/Image-3.png" />
         </div>
       </div>
     );

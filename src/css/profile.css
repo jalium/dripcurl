@@ -1,0 +1,32 @@
+.profile {
+  background-color: white;
+  border-radius: 4px;
+  max-width: 500px;
+  font-family: calluna;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hair-type {
+  position: relative;
+}
+
+.hair-type ul {
+  list-style-type: none;
+}
+.hair-type li {
+  display: flex;
+}
+
+.hair-type p {
+  text-transform: uppercase;
+}
+
+.profile-products ul {
+  list-style-type: none;
+}
+
+.profile-products p {
+  text-transform: uppercase;
+}

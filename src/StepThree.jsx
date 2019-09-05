@@ -6,17 +6,27 @@ class StepThree extends Component {
       return null;
     }
     return (
-      <div className="form-group">
+      <div>
         <label>How porous is your hair?</label>
-        <div>Describe high porosity</div>
+        {/* <label>Describe high porosity</label> */}
         <input
+          className="step-one"
           type="button"
           name="porosity"
           value="high"
           onClick={this.props.handleChange}
         />
-        <div>Describe low porosity</div>
+        {/* <label>Describe medium porosity</label> */}
         <input
+          className="step-one"
+          type="button"
+          name="porosity"
+          value="medium"
+          onClick={this.props.handleChange}
+        />
+        {/* <label>Describe low porosity</label> */}
+        <input
+          className="step-one"
           type="button"
           name="porosity"
           value="low"

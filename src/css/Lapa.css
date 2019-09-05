@@ -69,7 +69,6 @@ a:hover {
   line-height: 24px;
   text-transform: uppercase;
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
   width: 100%;
 }
@@ -109,21 +108,21 @@ a:hover {
   font-style: normal;
 } */
 
-@media screen {
-  .dripcurl-logo {
-    margin-top: 0px;
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 100;
-    background: #e0f391;
-    padding-bottom: 12.5vw;
-  }
-  .dripcurl-logo p {
-    display: block;
-    font-family: "calluna";
-    font-size: 225px;
-    text-transform: uppercase;
-    /* overflow: visible; */
-    margin: 0 24px;
-  }
+.dripcurl-logo {
+  margin-top: 0px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 100;
+  background: #e0f391;
+  padding-bottom: 50px;
 }
+.dripcurl-logo p {
+  display: block;
+  font-family: "calluna";
+  font-size: 250px;
+  text-transform: uppercase;
+  margin: 0 24px;
+}
+
+/* .lapa-img {
+} */

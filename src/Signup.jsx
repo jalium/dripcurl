@@ -54,17 +54,37 @@ class UnconnectedSignup extends Component {
 
   render = () => {
     return (
-        <form className="signup" onSubmit={this.handleSubmitSignup}>
-          <label>Username</label>
-          <input type="text" onChange={this.handleUsernameInputChange} />
-          <label>Email</label>
-          <input type="text" onChange={this.handleEmailInputChange} />
-          <label>Password</label>
-          <input type="password" onChange={this.handlePasswordInputChange} />
-          <label>Confirm Password</label>
-          <input type="password" onChange={this.handleConfirmChangeSignup} />
-          <input type="submit" value="Sign Up" />
-        </form>
+      <div className="signup-container">
+        <div className="signup-header">
+          <h1>Sign Up</h1>
+          <form className="signup" onSubmit={this.handleSubmitSignup}>
+            <input
+              type="text"
+              placeholder="username"
+              onChange={this.handleUsernameInputChange}
+            />
+
+            <input
+              type="text"
+              placeholder="email"
+              onChange={this.handleEmailInputChange}
+            />
+
+            <input
+              type="password"
+              placeholder="password"
+              onChange={this.handlePasswordInputChange}
+            />
+
+            <input
+              type="password"
+              placeholder="confirm password"
+              onChange={this.handleConfirmChangeSignup}
+            />
+            <input className="btn" type="submit" value="Find your curl type" />
+          </form>
+        </div>
+      </div>
     );
   };
 }

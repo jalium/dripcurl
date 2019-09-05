@@ -114,31 +114,35 @@ class UnconnectedCurlType extends Component {
 
   render() {
     return (
-      <div className="signup">
-        <p>Step {this.state.currentStep} </p>
-        <form onSubmit={this.handleSubmit}>
-          <StepOne
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            pattern={this.state.pattern}
-          />
+      <div className="signup-container">
+        <div className="signup-header">
+          <h1>Step {this.state.currentStep}</h1>
+          <div className="signup">
+            <form className="curl-form" onSubmit={this.handleSubmit}>
+              <StepOne
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                //pattern={this.state.pattern}
+              />
 
-          <StepTwo
-            currentStep={this.state.currentStep}
-            handleHairType={this.handleHairType}
-            pattern={this.state.pattern}
-            texture={this.state.texture}
-          />
+              <StepTwo
+                currentStep={this.state.currentStep}
+                handleHairType={this.handleHairType}
+                pattern={this.state.pattern}
+                //texture={this.state.texture}
+              />
 
-          <StepThree
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            porosity={this.state.porosity}
-          />
+              <StepThree
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                //porosity={this.state.porosity}
+              />
+            </form>
+          </div>
           {this.previousButton}
           {this.nextButton}
           {this.submitButton}
-        </form>
+        </div>
       </div>
     );
   }

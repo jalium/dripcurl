@@ -1,0 +1,8 @@
+.browse-profile {
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 450px 450px 450px;
+  grid-template-columns: 350px 350px 350px;
+  justify-content: center;
+  align-content: start;
+}
