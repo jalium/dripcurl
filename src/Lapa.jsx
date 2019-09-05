@@ -33,9 +33,9 @@ class UnconnectedLanding extends Component {
           <header className="dripcurl-logo">
             <p>DRIPCURL</p>
           </header>
-          <img className="Lapa-img" src="/curlImages/Image-1.png" />
-          <img className="Lapa-img" src="/curlImages/Image-2.png" />
-          <img className="Lapa-img" src="/curlImages/Image-3.png" />
+          <img id="lapa-img-1" src="/curlImages/Image-1.png" />
+          <img id="lapa-img-2" src="/curlImages/Image-3.png" />
+          <img id="lapa-img-3" src="/curlImages/Image-2.png" />
         </div>
       </div>
     );

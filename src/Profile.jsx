@@ -24,29 +24,56 @@ class UnconnectedProfile extends Component {
               </ul>
             </nav>
           </header>
-        </div>
-        <div className="content-outer">
-          <header className="dripcurl-logo">
-            <p>DRIPCURL</p>
-          </header>
+
+          <div className="content-outer">
+            <header className="dripcurl-logo">
+              <p>DRIPCURL</p>
+            </header>
+          </div>
+
           <div className="profile">
-            <img height="300px" src={this.props.frontendPath} />
+            <p>{this.props.username}</p>
+            <img src={this.props.frontendPath} />
             <div className="hair-type">
               <p>Your Hair Type: </p>
               <ul>
-                <li>{this.props.pattern}</li>
-                <li>{this.props.texture}</li>
-                <li>{this.props.porosity}</li>
+                <li>
+                  <b>pattern: </b>
+                  {this.props.pattern}
+                </li>
+                <li>
+                  <b>texture: </b>
+                  {this.props.texture}
+                </li>
+                <li>
+                  <b>porosity: </b>
+                  {this.props.porosity}
+                </li>
               </ul>
             </div>
             <div className="profile-products">
               <p>Your Fave Products:</p>
               <ul>
-                <li>{this.props.shampoo}</li>
-                <li>{this.props.conditioner}</li>
-                <li>{this.props.leaveIn}</li>
-                <li>{this.props.stylers}</li>
-                <li>{this.props.treatments}</li>
+                <li>
+                  <b>shampoo: </b>
+                  {this.props.shampoo}
+                </li>
+                <li>
+                  <b>conditioner: </b>
+                  {this.props.conditioner}
+                </li>
+                <li>
+                  <b>leave-in: </b>
+                  {this.props.leaveIn}
+                </li>
+                <li>
+                  <b>stylers: </b>
+                  {this.props.stylers}
+                </li>
+                <li>
+                  <b>treatments: </b>
+                  {this.props.treatments}
+                </li>
               </ul>
             </div>
           </div>

@@ -124,5 +124,22 @@ a:hover {
   margin: 0 24px;
 }
 
-/* .lapa-img {
-} */
+#lapa-img-1 {
+  position: relative;
+  top: -150px;
+  left: -50px;
+  z-index: 500;
+}
+
+#lapa-img-2 {
+  position: relative;
+  top: 1px;
+  right: -50px;
+  z-index: 500;
+}
+#lapa-img-3 {
+  position: absolute;
+  top: 1050px;
+  left: 180px;
+  z-index: 400;
+}

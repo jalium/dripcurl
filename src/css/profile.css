@@ -8,25 +8,47 @@
   margin-right: auto;
 }
 
+.profile p {
+  text-align: center;
+  text-decoration-color: #e0f391;
+}
+
+.profile img {
+  height: 200px;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .hair-type {
-  position: relative;
+  display: flex;
+  padding: 20px;
+}
+
+.profile-products {
+  display: flex;
+  padding: 20px;
 }
 
 .hair-type ul {
   list-style-type: none;
-}
-.hair-type li {
-  display: flex;
+  padding: 20px;
+  list-style-position: inside;
 }
 
 .hair-type p {
+  padding: 23px;
   text-transform: uppercase;
 }
 
 .profile-products ul {
   list-style-type: none;
+  padding: 20px;
+  list-style-position: inside;
 }
 
 .profile-products p {
+  padding: 23px;
   text-transform: uppercase;
 }

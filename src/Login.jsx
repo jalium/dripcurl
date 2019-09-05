@@ -60,21 +60,27 @@ class UnconnectedLogin extends Component {
   };
   render = () => {
     return (
-      <form onSubmit={this.handleSubmitLogin}>
-        <label>Username</label>
-        <input
-          id="user"
-          type="text"
-          onChange={this.handleUsernameInputChange}
-        />
-        <label>Password</label>
-        <input
-          id="password"
-          type="password"
-          onChange={this.handlePasswordInputChange}
-        />
-        <input type="submit" value="Log In" />
-      </form>
+      <div className="signup-container">
+        <div className="signup-header">
+          <h1>Login</h1>
+          <form className="signup" onSubmit={this.handleSubmitLogin}>
+            <input
+              id="user"
+              placeholder="username"
+              type="text"
+              onChange={this.handleUsernameInputChange}
+            />
+
+            <input
+              id="password"
+              placeholder="password"
+              type="password"
+              onChange={this.handlePasswordInputChange}
+            />
+            <input className="btn" type="submit" value="Login" />
+          </form>
+        </div>
+      </div>
     );
   };
 }
