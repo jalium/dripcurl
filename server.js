@@ -15,7 +15,7 @@ let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(
   url,
-  { useNewUrlParser: false, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   (err, db) => {
     dbo = db.db("curl");
   }

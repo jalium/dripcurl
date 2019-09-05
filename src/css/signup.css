@@ -1,0 +1,26 @@
+.signup {
+  margin: 40px auto;
+  max-width: 130px;
+  font-family: "calluna";
+  font-size: 16px;
+  padding: 50px 150px;
+  border-radius: 4px;
+  background: #e0f391;
+}
+
+.signup input {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.signup label {
+  clear: left;
+  float: left;
+  margin-bottom: 5px;
+}
+
+.signup p {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 800;
+}

@@ -6,7 +6,7 @@ class StepOne extends Component {
       return null;
     }
     return (
-      <div className="form-group">
+      <div>
         <label>How curly is your hair?</label>
         <input
           type="button"

@@ -18,9 +18,7 @@ class UnconnectedDashProfile extends Component {
   render = () => {
     return (
       <div>
-        <div>
-          <div>{this.props.user.username}</div>
-        </div>
+        <div>{this.props.user.username}</div>
         <img height="100px" src={this.props.user.profilePic} />
         <div>
           {this.products.product !== null ? (

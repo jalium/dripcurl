@@ -114,7 +114,7 @@ class UnconnectedCurlType extends Component {
 
   render() {
     return (
-      <>
+      <div className="signup">
         <p>Step {this.state.currentStep} </p>
         <form onSubmit={this.handleSubmit}>
           <StepOne
@@ -139,7 +139,7 @@ class UnconnectedCurlType extends Component {
           {this.nextButton}
           {this.submitButton}
         </form>
-      </>
+      </div>
     );
   }
 }

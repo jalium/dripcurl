@@ -10,7 +10,9 @@ import CurlType from "./CurlType.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Profile from "./Profile.jsx";
 import EditProfile from "./EditProfile.jsx";
-import "./Lapa.css";
+import "./css/Lapa.css";
+import "./css/main.css";
+import "./css/signup.css";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {

@@ -6,7 +6,7 @@ class StepTwo extends Component {
       return null;
     } else if (this.props.pattern === "wavy") {
       return (
-        <div className="form-group">
+        <div>
           <label>Choose the photo that most ressembles your wavy hair</label>
           <input
             type="image"
@@ -14,8 +14,7 @@ class StepTwo extends Component {
             alt="2a"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-2-WAVY-HAIR-2A.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -23,8 +22,7 @@ class StepTwo extends Component {
             alt="2b"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-2-WAVY-HAIR-2B.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -32,8 +30,7 @@ class StepTwo extends Component {
             alt="2c"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-2-WAVY-HAIR-2C.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
         </div>
       );
@@ -47,8 +44,7 @@ class StepTwo extends Component {
             alt="3a"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-3-CURLY-HAIR-3A.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -56,8 +52,7 @@ class StepTwo extends Component {
             alt="3b"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-3-CURLY-HAIR-3B.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -65,8 +60,7 @@ class StepTwo extends Component {
             alt="3c"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-3-CURLY-HAIR-3C.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
         </div>
       );
@@ -80,8 +74,7 @@ class StepTwo extends Component {
             alt="4a"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-4-COILY-HAIR-4A.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -89,8 +82,7 @@ class StepTwo extends Component {
             alt="4b"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-4-COILY-HAIR-4B.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
           <input
             type="image"
@@ -98,8 +90,7 @@ class StepTwo extends Component {
             alt="4c"
             onClick={this.props.handleHairType}
             src="/curlImages/TYPE-4-COILY-HAIR-4C.jpg"
-            height="100px"
-            width="100px"
+            width="200px"
           />
         </div>
       );

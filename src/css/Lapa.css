@@ -1,0 +1,129 @@
+a {
+  background-color: transparent;
+}
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+p,
+ul,
+a {
+  text-rendering: geometricPrecision;
+  font-weight: normal;
+}
+
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:hover {
+  border-color: transparent;
+}
+
+.content-outer {
+  text-align: center;
+}
+
+.main-menu {
+  position: relative;
+  width: 100%;
+  right: 0;
+  background: #e0f391;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  top: 0px;
+  padding: 10px;
+}
+.main-menu nav {
+  padding: 0 35px 0 0;
+  width: 50%;
+}
+.main-menu p {
+  width: 525px;
+  padding-left: 35px;
+  font-family: "calluna";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 22px;
+}
+.main-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-family: "ransom-sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+.main-menu ul li {
+  margin: 0;
+  padding: 0;
+}
+.main-menu ul li a {
+  color: #000;
+}
+.main-menu ul li a:hover:after {
+  background: #000;
+  height: 2px;
+  width: 100%;
+}
+.main-menu ul li a:after {
+  transform-origin: left bottom;
+  content: "";
+  width: 0%;
+  height: 1px;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  background: transparent;
+  display: block;
+  transition: all 450ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.main-menu ul li:last-of-type a {
+  margin-right: 0;
+}
+/*! CSS Used fontfaces */
+/* @font-face {
+  font-family: "callunaregular";
+  src: url("calluna-regular-webfont.woff2") format("woff2"),
+    url("calluna-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@media screen {
+  .dripcurl-logo {
+    margin-top: 0px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 100;
+    background: #e0f391;
+    padding-bottom: 12.5vw;
+  }
+  .dripcurl-logo p {
+    display: block;
+    font-family: "calluna";
+    font-size: 225px;
+    text-transform: uppercase;
+    /* overflow: visible; */
+    margin: 0 24px;
+  }
+}
