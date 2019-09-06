@@ -9,6 +9,9 @@ class StepTwo extends Component {
         <div>
           <label>Choose the photo that most ressembles your wavy hair</label>
           <input
+            className={
+              "curl-image " + (this.props.texture === "2a" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="2a"
@@ -17,6 +20,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "2b" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="2b"
@@ -25,6 +31,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "2c" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="2c"
@@ -39,6 +48,9 @@ class StepTwo extends Component {
         <div>
           <label>Choose the photo that most ressembles your curly hair</label>
           <input
+            className={
+              "curl-image " + (this.props.texture === "3a" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="3a"
@@ -47,6 +59,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "3b" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="3b"
@@ -55,6 +70,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "3c" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="3c"
@@ -69,6 +87,9 @@ class StepTwo extends Component {
         <div>
           <label>Choose the photo that most ressembles your coily hair</label>
           <input
+            className={
+              "curl-image " + (this.props.texture === "4a" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="4a"
@@ -77,6 +98,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "4b" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="4b"
@@ -85,6 +109,9 @@ class StepTwo extends Component {
             width="200px"
           />
           <input
+            className={
+              "curl-image " + (this.props.texture === "4c" ? "active-img" : "")
+            }
             type="image"
             name="texture"
             alt="4c"

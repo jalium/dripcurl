@@ -1,0 +1,45 @@
+.edit-products {
+  position: relative;
+  margin: 40px auto;
+  max-width: 130px;
+  font-family: "calluna";
+  font-size: 16px;
+  padding: 25px 208px 47px 30px;
+  border-radius: 10px;
+  background: white;
+}
+
+.edit-products input {
+  display: block;
+  width: 208%;
+  padding: 10px;
+  font-family: "ransom-sans", sans-serif;
+  font-size: 14px;
+  outline: 0;
+}
+
+.edit-products label {
+  clear: left;
+  float: left;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.edit-products p {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.edit-btn {
+  color: white;
+  background: black;
+  margin-top: 10px;
+  margin-left: 11px;
+  border-radius: 3px;
+}
+
+#flex {
+  display: flex;
+}

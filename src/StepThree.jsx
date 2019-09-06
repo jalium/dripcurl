@@ -10,7 +10,9 @@ class StepThree extends Component {
         <label>How porous is your hair?</label>
         {/* <label>Describe high porosity</label> */}
         <input
-          className="step-one"
+          className={
+            "step-one " + (this.props.porosity === "high" ? "active" : "")
+          }
           type="button"
           name="porosity"
           value="high"
@@ -18,7 +20,9 @@ class StepThree extends Component {
         />
         {/* <label>Describe medium porosity</label> */}
         <input
-          className="step-one"
+          className={
+            "step-one " + (this.props.porosity === "medium" ? "active" : "")
+          }
           type="button"
           name="porosity"
           value="medium"
@@ -26,7 +30,9 @@ class StepThree extends Component {
         />
         {/* <label>Describe low porosity</label> */}
         <input
-          className="step-one"
+          className={
+            "step-one " + (this.props.porosity === "low" ? "active" : "")
+          }
           type="button"
           name="porosity"
           value="low"

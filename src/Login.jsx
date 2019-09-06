@@ -65,6 +65,7 @@ class UnconnectedLogin extends Component {
           <h1>Login</h1>
           <form className="signup" onSubmit={this.handleSubmitLogin}>
             <input
+              className="no-border"
               id="user"
               placeholder="username"
               type="text"
@@ -72,6 +73,7 @@ class UnconnectedLogin extends Component {
             />
 
             <input
+              className="no-border"
               id="password"
               placeholder="password"
               type="password"

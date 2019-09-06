@@ -122,20 +122,20 @@ class UnconnectedCurlType extends Component {
               <StepOne
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
-                //pattern={this.state.pattern}
+                pattern={this.state.pattern}
               />
 
               <StepTwo
                 currentStep={this.state.currentStep}
                 handleHairType={this.handleHairType}
                 pattern={this.state.pattern}
-                //texture={this.state.texture}
+                texture={this.state.texture}
               />
 
               <StepThree
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
-                //porosity={this.state.porosity}
+                porosity={this.state.porosity}
               />
             </form>
           </div>

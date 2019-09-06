@@ -16,6 +16,7 @@ import "./css/signup.css";
 import "./css/dashProfile.css";
 import "./css/dashboard.css";
 import "./css/profile.css";
+import "./css/editProfile.css";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {

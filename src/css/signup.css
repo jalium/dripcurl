@@ -30,8 +30,12 @@
   padding: 20px;
   font-family: "ransom-sans", sans-serif;
   font-size: 14px;
-  border: 0;
+  /* border: 0; */
   outline: 0;
+}
+
+.no-border {
+  border: 0;
 }
 
 .signup label {
@@ -58,16 +62,41 @@
   border: 0;
   outline: 1px;
   outline-style: solid;
+  cursor: pointer;
+}
+
+.signup input.step-one:hover {
+  background: black;
+  color: white;
+}
+
+.active {
+  background-color: black !important;
+  color: white;
+}
+
+.active-img {
+  border: 4px solid black !important;
 }
 
 .curl-form {
   width: 100%;
 }
 
+.curl-image {
+  border: 4px solid white;
+  margin-top: 10px;
+}
+
+.curl-image:hover {
+  border: 4px solid black;
+}
+
 .btn {
   border-radius: 2px;
   color: white;
   background: black;
+  border-radius: 3px;
 }
 
 .btn-submit {
@@ -75,6 +104,7 @@
   border-radius: 2px;
   color: white;
   background: black;
+  border-radius: 3px;
 }
 
 .btn-back {
@@ -82,6 +112,7 @@
   border-radius: 2px;
   color: white;
   background: black;
+  border-radius: 3px;
 }
 
 .btn-next {
@@ -89,4 +120,5 @@
   border-radius: 2px;
   color: white;
   background: black;
+  border-radius: 3px;
 }

@@ -87,55 +87,65 @@ class UnconnectedEditProfile extends Component {
       <div className="signup-container">
         <div className="signup-header">
           <h1>Edit your profile</h1>
-          <form className="signup" onSubmit={this.handleSubmitPic}>
-            <label>Add a profile picture</label>
-            <input
-              type="file"
-              name="profilePic"
-              onChange={this.handlePicChange}
-            />
-            <input
-              className="btn"
-              type="submit"
-              value="Update Profile Picture"
-            />
-          </form>
-          <form onSubmit={this.handleSubmitProducts}>
-            <label>Shampoo</label>
-            <input
-              id="shampoo"
-              type="text"
-              onChange={this.handleShampooInputChange}
-            />
-            <label>Conditioner</label>
-            <input
-              id="conditioner"
-              type="text"
-              onChange={this.handleConditionerInputChange}
-            />
-            <label>Leave-In</label>
-            <input
-              id="leaveIn"
-              type="text"
-              placeholder={this.props.stylers}
-              onChange={this.handleLeaveInInputChange}
-            />
-            <label>Treatments</label>
-            <input
-              id="treatments"
-              type="text"
-              placeholder={this.props.treatments}
-              onChange={this.handleTreatmentsInputChange}
-            />
-            <label>Stylers</label>
-            <input
-              id="stylers"
-              type="text"
-              placeholder={this.props.stylers}
-              onChange={this.handleStylersInputChange}
-            />
-            <input className="btn" type="submit" value="Update Products" />
-          </form>
+          <div id="flex">
+            <form className="signup" onSubmit={this.handleSubmitPic}>
+              <label>Add a profile picture</label>
+              <input
+                className="input-file"
+                type="file"
+                name="profilePic"
+                onChange={this.handlePicChange}
+              />
+              <input
+                className="btn"
+                type="submit"
+                value="Update Profile Picture"
+              />
+            </form>
+            <form
+              className="edit-products"
+              onSubmit={this.handleSubmitProducts}
+            >
+              <label>Shampoo</label>
+              <input
+                id="shampoo"
+                type="text"
+                onChange={this.handleShampooInputChange}
+              />
+              <label>Conditioner</label>
+              <input
+                id="conditioner"
+                type="text"
+                onChange={this.handleConditionerInputChange}
+              />
+              <label>Leave-In</label>
+              <input
+                id="leaveIn"
+                type="text"
+                placeholder={this.props.stylers}
+                onChange={this.handleLeaveInInputChange}
+              />
+              <label>Treatments</label>
+              <input
+                id="treatments"
+                type="text"
+                placeholder={this.props.treatments}
+                onChange={this.handleTreatmentsInputChange}
+              />
+              <label>Stylers</label>
+              <input
+                id="stylers"
+                type="text"
+                placeholder={this.props.stylers}
+                onChange={this.handleStylersInputChange}
+              />
+              <input
+                className="edit-btn"
+                type="submit"
+                value="Update Products"
+              />
+            </form>
+          </div>
         </div>
       </div>
     );

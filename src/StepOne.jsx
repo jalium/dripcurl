@@ -9,21 +9,21 @@ class StepOne extends Component {
       <div>
         <label>How curly is your hair?</label>
         <input
-          className="step-one"
+          className={"step-one " + (this.props.pattern === "wavy" ? "active" : "")}
           type="button"
           name="pattern"
           value="wavy"
           onClick={this.props.handleChange}
         />
         <input
-          className="step-one"
+          className={"step-one " + (this.props.pattern === "curly" ? "active" : "")}
           type="button"
           name="pattern"
           value="curly"
           onClick={this.props.handleChange}
         />
         <input
-          className="step-one"
+          className={"step-one " + (this.props.pattern === "coily" ? "active" : "")}
           type="button"
           name="pattern"
           value="coily"
