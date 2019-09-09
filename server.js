@@ -15,7 +15,7 @@ let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(
   url,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: false, useUnifiedTopology: true },
   (err, db) => {
     dbo = db.db("curl");
   }
@@ -257,6 +257,13 @@ app.get("/dashboard", upload.none(), (req, res) => {
 });
 //have this main endpoint check for the cookie , to see if logged in
 // Your endpoints go before this line
+
+app.get("/logout", upload.none(), (req, res) => {
+  console.log("GET to /logout");
+  let sessionId = req.cookies.cookieId;
+  delete sessions[sessionId];
+  res.send(JSON.stringify({ success: true }));
+});
 
 app.all("/*", (req, res, next) => {
   // needed for react router

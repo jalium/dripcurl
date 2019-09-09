@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import DashProfile from "./DashProfile.jsx";
 
 class UnconnectedDashboard extends Component {
@@ -14,6 +14,20 @@ class UnconnectedDashboard extends Component {
   componentDidMount() {
     this.handleLoadUsers();
   }
+
+  handleLogout = async evt => {
+    let response = await fetch("/logout", {
+      method: "GET",
+      credentials: "include"
+    });
+    let resText = await response.text();
+    console.log("/logout response", resText);
+    let body = JSON.parse(resText);
+    if (body.success) {
+      this.props.dispatch({ type: "logout" });
+      this.props.history.push("/");
+    }
+  };
 
   handleLoadUsers = async evt => {
     let response = await fetch("/dashboard", { method: "GET" });
@@ -37,6 +51,9 @@ class UnconnectedDashboard extends Component {
               </li>
               <li>all hairtypes</li>
               <li>search for username</li>
+              <li>
+                <button onClick={this.handleLogout}>Logout</button>
+              </li>
             </ul>
           </nav>
         </header>
@@ -48,9 +65,17 @@ class UnconnectedDashboard extends Component {
         </div>
 
         <main className="browse-profile">
-          {this.state.allUsers.map((user, i) => (
-            <DashProfile user={user} key={i} />
-          ))}
+          {this.state.allUsers
+            .filter(user => {
+              return (
+                user.type[0].pattern === this.props.pattern &&
+                user.type[0].texture === this.props.texture &&
+                user.type[0].porosity === this.props.porosity
+              );
+            })
+            .map((user, i) => (
+              <DashProfile user={user} key={i} />
+            ))}
         </main>
       </div>
     );
@@ -67,4 +92,4 @@ let mapStateToProps = st => {
   };
 };
 let Dashboard = connect(mapStateToProps)(UnconnectedDashboard);
-export default Dashboard;
+export default withRouter(Dashboard);

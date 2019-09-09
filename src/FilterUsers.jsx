@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class UnconnectedFooter extends Component {
+
+class UnconnectedFilterUsers extends Component {
   constructor(props) {
     super(props);
   }
   render = () => {
     return (
       <div>
-        <h1>Footer</h1>
+       
       </div>
     );
   };
@@ -18,5 +19,5 @@ let mapStateToProps = st => {
     authenticated: st.authenticated
   };
 };
-let Footer = connect(mapStateToProps)(UnconnectedFooter);
-export default Footer;
+let FilterUsers = connect(mapStateToProps)(UnconnectedFilterUsers);
+export default FilterUsers;

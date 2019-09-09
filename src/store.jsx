@@ -1,5 +1,8 @@
 import { createStore } from "redux";
 let reducer = (state, action) => {
+  if (action.type === "logout") {
+    state = undefined;
+  }
   if (action.type === "user") {
     return {
       ...state,
