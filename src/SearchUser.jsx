@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Filter from "./Filter.jsx";
 
 class UnconnectedFilterUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHidden: true
+      isHidden: true,
+      searchQuery: ""
     };
   }
   toggleHidden() {
@@ -19,13 +19,19 @@ class UnconnectedFilterUsers extends Component {
     return (
       <div>
         <button class="btn-link" onClick={this.toggleHidden.bind(this)}>
-          Filter Hairtypes
+          Search for User
         </button>
-        {!this.state.isHidden && <Filter allUsers={this.props.allUsers} />}
+        {!this.state.isHidden && <Child />}
       </div>
     );
   };
 }
+
+const Child = () => (
+  <div>
+    <input type="text" placeholder="search..." />
+  </div>
+);
 
 let mapStateToProps = st => {
   return {

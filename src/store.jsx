@@ -32,6 +32,13 @@ let reducer = (state, action) => {
       stylers: action.stylers
     };
   }
+  if (action.type === "filter") {
+    return {
+      ...state,
+      isFiltered: action.isFiltered,
+      filteredResults: action.filteredResults
+    };
+  }
   return state;
 };
 
@@ -49,7 +56,9 @@ const store = createStore(
     leaveIn: "",
     treatments: "",
     stylers: "",
-    frontendPath: ""
+    frontendPath: "",
+    isFiltered: false,
+    filteredResults: []
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

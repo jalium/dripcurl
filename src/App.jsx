@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
-import Header from "./Header.jsx";
 import Landing from "./Lapa.jsx";
-import Footer from "./Footer.jsx";
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import CurlType from "./CurlType.jsx";

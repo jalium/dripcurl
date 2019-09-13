@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import DashProfile from "./DashProfile.jsx";
+import FilterUsers from "./FilterUsers.jsx";
 
 class UnconnectedDashboard extends Component {
   constructor(props) {
@@ -49,10 +50,22 @@ class UnconnectedDashboard extends Component {
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
-              <li>all hairtypes</li>
-              <li>search for username</li>
               <li>
-                <button onClick={this.handleLogout}>Logout</button>
+                <FilterUsers
+                  allUsers={this.state.allUsers}
+                  showUsers={
+                    this.state.isFiltered
+                      ? this.state.filteredResults
+                      : this.state.allUsers
+                  }
+                  onChangePage={this.onChangePage}
+                />
+              </li>
+              <li>search users</li>
+              <li>
+                <button className="btn-link" onClick={this.handleLogout}>
+                  Logout
+                </button>
               </li>
             </ul>
           </nav>
