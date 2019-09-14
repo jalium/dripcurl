@@ -33,23 +33,23 @@ class UnconnectedLogin extends Component {
     if (body.currentUser.success) {
       this.props.dispatch({
         type: "user",
-        user: body.username,
-        cookie: body.cookie,
-        frontendPath: body.frontendPath
+        user: body.currentUser.username,
+        cookie: body.currentUser.cookie,
+        frontendPath: body.currentUser.frontendPath
       }),
         this.props.dispatch({
           type: "curlType",
-          pattern: body.pattern,
-          texture: body.texture,
-          porosity: body.porosity
+          pattern: body.currentUser.pattern,
+          texture: body.currentUser.texture,
+          porosity: body.currentUser.porosity
         }),
         this.props.dispatch({
           type: "products",
-          shampoo: body.shampoo,
-          conditioner: body.conditioner,
-          leaveIn: body.leaveIn,
-          treatments: body.treatments,
-          stylers: body.stylers
+          shampoo: body.currentUser.shampoo,
+          conditioner: body.currentUser.conditioner,
+          leaveIn: body.currentUser.leaveIn,
+          treatments: body.currentUser.treatments,
+          stylers: body.currentUser.stylers
         }),
         this.props.dispatch({
           type: "login",
