@@ -30,7 +30,7 @@ class UnconnectedLogin extends Component {
     let resText = await response.text();
     console.log("/login response ", resText);
     let body = JSON.parse(resText);
-    if (body.success) {
+    if (body.currentUser.success) {
       this.props.dispatch({
         type: "user",
         user: body.username,
@@ -54,6 +54,10 @@ class UnconnectedLogin extends Component {
         this.props.dispatch({
           type: "login",
           authenticated: true
+        }),
+        this.props.dispatch({
+          type: "loadUsers",
+          allUsers: body.userData
         });
       this.props.history.push("/dashboard");
     }

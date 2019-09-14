@@ -44,11 +44,33 @@ class UnconnectedSignup extends Component {
     if (body.success) {
       this.props.dispatch({
         type: "user",
-        username: body.username,
-        type: "login",
-        authenticated: true
+        username: body.username
       });
-      this.props.history.push("/curltype");
+      let logResponse = await fetch("/login", {
+        method: "POST",
+        body: data,
+        credentials: "include"
+      });
+      let logResText = await logResponse.text();
+      console.log("/login response", logResText);
+      let logBody = JSON.parse(logResText);
+      if (logBody.currentUser.success) {
+        this.props.dispatch({
+          type: "user",
+          user: logBody.username,
+          cookie: logBody.cookie,
+          frontendPath: logBody.frontendPath
+        }),
+          this.props.dispatch({
+            type: "login",
+            authenticated: true
+          }),
+          this.props.dispatch({
+            type: "loadUsers",
+            allUsers: logBody.userData
+          });
+        this.props.history.push("/curltype");
+      }
     }
   };
 

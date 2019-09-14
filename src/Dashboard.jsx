@@ -7,13 +7,6 @@ import FilterUsers from "./FilterUsers.jsx";
 class UnconnectedDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      allUsers: []
-    };
-  }
-
-  componentDidMount() {
-    this.handleLoadUsers();
   }
 
   handleLogout = async evt => {
@@ -30,16 +23,6 @@ class UnconnectedDashboard extends Component {
     }
   };
 
-  handleLoadUsers = async evt => {
-    let response = await fetch("/dashboard", { method: "GET" });
-    let resText = await response.text();
-    console.log("/dashboard response ", resText);
-    let body = JSON.parse(resText);
-    if (body.length !== 0) {
-      this.setState({ allUsers: body });
-    }
-  };
-
   render = () => {
     return (
       <div>
@@ -51,15 +34,7 @@ class UnconnectedDashboard extends Component {
                 <Link to="/profile">Profile</Link>
               </li>
               <li>
-                <FilterUsers
-                  allUsers={this.state.allUsers}
-                  showUsers={
-                    this.state.isFiltered
-                      ? this.state.filteredResults
-                      : this.state.allUsers
-                  }
-                  onChangePage={this.onChangePage}
-                />
+                <FilterUsers />
               </li>
               <li>search users</li>
               <li>
@@ -78,14 +53,14 @@ class UnconnectedDashboard extends Component {
         </div>
 
         <main className="browse-profile">
-          {this.state.allUsers
-            .filter(user => {
-              return (
-                user.type[0].pattern === this.props.pattern &&
-                user.type[0].texture === this.props.texture &&
-                user.type[0].porosity === this.props.porosity
-              );
-            })
+          {this.props.allUsers
+            // .filter(user => {
+            //   return (
+            //     user.type[0].pattern === this.props.pattern &&
+            //     user.type[0].texture === this.props.texture &&
+            //     user.type[0].porosity === this.props.porosity
+            //   );
+            // })
             .map((user, i) => (
               <DashProfile user={user} key={i} />
             ))}
@@ -97,6 +72,7 @@ class UnconnectedDashboard extends Component {
 
 let mapStateToProps = st => {
   return {
+    allUsers: st.allUsers,
     authenticated: st.authenticated,
     username: st.username,
     pattern: st.pattern,

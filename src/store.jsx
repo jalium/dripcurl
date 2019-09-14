@@ -3,6 +3,12 @@ let reducer = (state, action) => {
   if (action.type === "logout") {
     state = undefined;
   }
+  if (action.type === "loadUsers") {
+    return {
+      ...state,
+      allUsers: action.allUsers
+    };
+  }
   if (action.type === "user") {
     return {
       ...state,
@@ -12,7 +18,7 @@ let reducer = (state, action) => {
     };
   }
   if (action.type === "login") {
-    return { ...state, authenticated: action.athenticated };
+    return { ...state, authenticated: action.authenticated };
   }
   if (action.type === "curlType") {
     return {
@@ -35,8 +41,7 @@ let reducer = (state, action) => {
   if (action.type === "filter") {
     return {
       ...state,
-      isFiltered: action.isFiltered,
-      filteredResults: action.filteredResults
+      filterQuery: action.filter
     };
   }
   return state;
@@ -45,6 +50,7 @@ let reducer = (state, action) => {
 const store = createStore(
   reducer,
   {
+    allUsers: [],
     username: undefined,
     authenticated: false,
     cookie: undefined,
@@ -57,8 +63,7 @@ const store = createStore(
     treatments: "",
     stylers: "",
     frontendPath: "",
-    isFiltered: false,
-    filteredResults: []
+    filterQuery: []
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

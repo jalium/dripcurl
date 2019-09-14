@@ -11,12 +11,19 @@ reloadMagic(app);
 
 let sessions = {};
 let dbo = undefined;
+/*
 let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
+*/
+let url = "mongodb://localhost:27017/MyDb";
 MongoClient.connect(
   url,
-  { useNewUrlParser: false, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   (err, db) => {
+    if (err) {
+      return console.dir(err);
+    }
+    console.log("Connected to db");
     dbo = db.db("curl");
   }
 );
@@ -80,6 +87,9 @@ app.post("/signup", upload.none(), (req, res) => {
 app.post("/login", upload.none(), (req, res) => {
   console.log("POST to /login");
   console.log("login", req.body);
+  let currentUser = {};
+  let userData = [];
+  let count = 0;
   let name = req.body.username;
   let pwd = req.body.password;
   dbo.collection("users").findOne({ username: name }, (err, user) => {
@@ -101,7 +111,7 @@ app.post("/login", upload.none(), (req, res) => {
             res.send(JSON.stringify({ success: false }));
           } else if (user.username) {
             sessions[info.cookie] = info.username;
-            let currentUser = {
+            currentUser = {
               success: true,
               username: info.username,
               cookie: info.cookie,
@@ -115,7 +125,44 @@ app.post("/login", upload.none(), (req, res) => {
               stylers: info.stylers,
               frontendPath: info.frontendPath
             };
-            res.send(JSON.stringify(currentUser));
+          }
+        });
+      dbo
+        .collection("curlInfo")
+        .find({})
+        .toArray((err, files) => {
+          if (err) {
+            return console.dir(err);
+          }
+          if (!files || files.length === 0 || err) {
+            console.log("no users");
+            res.send(JSON.stringify({ success: false }));
+          } else {
+            files.forEach(file => {
+              userData[count++] = {
+                username: file.username,
+                profilePic: file.frontendPath,
+                type: [
+                  {
+                    pattern: file.pattern,
+                    texture: file.texture,
+                    porosity: file.porosity
+                  }
+                ],
+                products: [
+                  {
+                    shampoo: file.shampoo,
+                    conditioner: file.conditioner,
+                    leaveIn: file.leaveIn,
+                    treatments: file.treatments,
+                    stylers: file.stylers
+                  }
+                ]
+              };
+            });
+            res.send(
+              JSON.stringify({ currentUser: currentUser, userData: userData })
+            );
           }
         });
     } else {
@@ -214,49 +261,6 @@ app.post("/editProfile", upload.single("profilePic"), (req, res) => {
     });
   }
 });
-
-app.get("/dashboard", upload.none(), (req, res) => {
-  console.log("GET to /dashboard");
-
-  let userData = [];
-  let count = 0;
-
-  dbo
-    .collection("curlInfo")
-    .find({})
-    .toArray((err, files) => {
-      if (!files || files.length === 0 || err) {
-        console.log("no users");
-        res.send(JSON.stringify({ success: false }));
-      } else {
-        files.forEach(file => {
-          userData[count++] = {
-            username: file.username,
-            profilePic: file.frontendPath,
-            type: [
-              {
-                pattern: file.pattern,
-                texture: file.texture,
-                porosity: file.porosity
-              }
-            ],
-            products: [
-              {
-                shampoo: file.shampoo,
-                conditioner: file.conditioner,
-                leaveIn: file.leaveIn,
-                treatments: file.treatments,
-                stylers: file.stylers
-              }
-            ]
-          };
-        });
-        res.send(JSON.stringify(userData));
-      }
-    });
-});
-//have this main endpoint check for the cookie , to see if logged in
-// Your endpoints go before this line
 
 app.get("/logout", upload.none(), (req, res) => {
   console.log("GET to /logout");

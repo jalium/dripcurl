@@ -108,7 +108,7 @@ class UnconnectedCurlType extends Component {
         texture: texture,
         porosity: porosity
       });
-      this.props.history.push("/dashboard");
+      this.props.history.push("/dasboard");
     }
   };
 
