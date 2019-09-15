@@ -16,9 +16,9 @@ class UnconnectedLanding extends Component {
             </p>
             <nav>
               <ul>
-                <li>
+                {/* <li>
                   <Link to="/dashboard">Dashboard</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/signup">Sign up</Link>
                 </li>

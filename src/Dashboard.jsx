@@ -54,13 +54,13 @@ class UnconnectedDashboard extends Component {
 
         <main className="browse-profile">
           {this.props.allUsers
-            // .filter(user => {
-            //   return (
-            //     user.type[0].pattern === this.props.pattern &&
-            //     user.type[0].texture === this.props.texture &&
-            //     user.type[0].porosity === this.props.porosity
-            //   );
-            // })
+            .filter(user => {
+              return (
+                user.type[0].pattern === this.props.pattern &&
+                user.type[0].texture === this.props.texture &&
+                user.type[0].porosity === this.props.porosity
+              );
+            })
             .map((user, i) => (
               <DashProfile user={user} key={i} />
             ))}

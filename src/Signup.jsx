@@ -56,15 +56,9 @@ class UnconnectedSignup extends Component {
       let logBody = JSON.parse(logResText);
       if (logBody.currentUser.success) {
         this.props.dispatch({
-          type: "user",
-          user: logBody.username,
-          cookie: logBody.cookie,
-          frontendPath: logBody.frontendPath
+          type: "login",
+          authenticated: true
         }),
-          this.props.dispatch({
-            type: "login",
-            authenticated: true
-          }),
           this.props.dispatch({
             type: "loadUsers",
             allUsers: logBody.userData

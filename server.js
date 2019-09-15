@@ -35,6 +35,20 @@ app.use("/curlImages", express.static(__dirname + "/curlImages"));
 // Your endpoints go after this line
 app.use("/uploads", express.static("uploads"));
 
+let createCookie = (username, req, res) => {
+  if (req.cookies.cookieId === undefined) {
+    let generatedId = () => {
+      return "" + Math.floor(Math.random() * 100000000);
+    };
+    let sessionId = generatedId();
+    sessions[sessionId] = username;
+    res.cookie("cookieId", sessionId);
+    return sessionId;
+  } else {
+    return req.cookies.cookieId;
+  }
+};
+
 app.post("/signup", upload.none(), (req, res) => {
   console.log("POST to /signup");
   let name = req.body.username;
@@ -52,15 +66,8 @@ app.post("/signup", upload.none(), (req, res) => {
         email: email,
         password: pwd
       });
-
-      let generatedId = () => {
-        return "" + Math.floor(Math.random() * 100000000);
-      };
-
-      let sessionId = generatedId();
-      sessions[sessionId] = name;
-      res.cookie("cookieId", sessionId);
-
+      let sessionId = createCookie(name, req, res);
+      console.log("sessionId in login", sessionId);
       dbo
         .collection("curlInfo")
         .insertOne({ username: name, cookie: sessionId }, (err, user) => {
@@ -79,20 +86,17 @@ app.post("/signup", upload.none(), (req, res) => {
   });
 });
 
-// let login = (username, password) => {
-//   check if pass=username
-//   check if cookie exists, if not, make a cookie
-// }
-
-app.post("/login", upload.none(), (req, res) => {
+app.post("/login", upload.none(), async (req, res) => {
   console.log("POST to /login");
   console.log("login", req.body);
+  let count = 0;
   let currentUser = {};
   let userData = [];
-  let count = 0;
   let name = req.body.username;
   let pwd = req.body.password;
-  dbo.collection("users").findOne({ username: name }, (err, user) => {
+
+  let sessionId = await createCookie(name, req, res);
+  dbo.collection("users").findOne({ username: username }, (err, user) => {
     if (err) {
       console.log("/login error", err);
       res.send(JSON.stringify({ success: false }));
@@ -102,14 +106,43 @@ app.post("/login", upload.none(), (req, res) => {
       res.send(JSON.stringify({ success: false }));
       return;
     }
-    if (user.password === pwd) {
+    if (user.password === password) {
       dbo
         .collection("curlInfo")
-        .findOne({ cookie: req.cookies.cookieId }, (err, info) => {
+        .findOne({ username: username }, (err, info) => {
+          console.log("cookies match?", info.cookie, req.cookies.cookieId);
           if (err) {
             console.log("/login error", err);
             res.send(JSON.stringify({ success: false }));
-          } else if (user.username) {
+          } else if (info.cookie !== req.cookies.cookieId) {
+            console.log("cookies don't match");
+            dbo.collection("curlInfo").updateOne(
+              { username: username },
+              {
+                $set: {
+                  cookie: sessionId
+                }
+              }
+            );
+            sessions[info.cookie] = info.username;
+            currentUser = {
+              success: true,
+              username: info.username,
+              cookie: info.cookie,
+              pattern: info.pattern,
+              texture: info.texture,
+              porosity: info.porosity,
+              shampoo: info.shampoo,
+              conditioner: info.conditioner,
+              leaveIn: info.leaveIn,
+              treatments: info.treatments,
+              stylers: info.stylers,
+              frontendPath: info.frontendPath
+            };
+            console.log("current", currentUser);
+            return currentUser;
+          } else if (info.cookie === req.cookies.cookieId) {
+            console.log("cookies match");
             sessions[info.cookie] = info.username;
             currentUser = {
               success: true,
@@ -127,48 +160,48 @@ app.post("/login", upload.none(), (req, res) => {
             };
           }
         });
-      dbo
-        .collection("curlInfo")
-        .find({})
-        .toArray((err, files) => {
-          if (err) {
-            return console.dir(err);
-          }
-          if (!files || files.length === 0 || err) {
-            console.log("no users");
-            res.send(JSON.stringify({ success: false }));
-          } else {
-            files.forEach(file => {
-              userData[count++] = {
-                username: file.username,
-                profilePic: file.frontendPath,
-                type: [
-                  {
-                    pattern: file.pattern,
-                    texture: file.texture,
-                    porosity: file.porosity
-                  }
-                ],
-                products: [
-                  {
-                    shampoo: file.shampoo,
-                    conditioner: file.conditioner,
-                    leaveIn: file.leaveIn,
-                    treatments: file.treatments,
-                    stylers: file.stylers
-                  }
-                ]
-              };
-            });
-            res.send(
-              JSON.stringify({ currentUser: currentUser, userData: userData })
-            );
-          }
-        });
     } else {
       res.send(JSON.stringify({ success: false }));
     }
   });
+
+  dbo
+    .collection("curlInfo")
+    .find({})
+    .toArray((err, files) => {
+      if (err) {
+        return console.dir(err);
+      }
+      if (!files || files.length === 0 || err) {
+        console.log("no users");
+        res.send(JSON.stringify({ success: false }));
+      } else {
+        files.forEach(file => {
+          userData[count++] = {
+            username: file.username,
+            profilePic: file.frontendPath,
+            type: [
+              {
+                pattern: file.pattern,
+                texture: file.texture,
+                porosity: file.porosity
+              }
+            ],
+            products: [
+              {
+                shampoo: file.shampoo,
+                conditioner: file.conditioner,
+                leaveIn: file.leaveIn,
+                treatments: file.treatments,
+                stylers: file.stylers
+              }
+            ]
+          };
+        });
+      }
+    });
+
+  res.send(JSON.stringify({ currentUser: currentUser, userData: userData }));
 });
 
 app.post("/curlType", upload.none(), (req, res) => {

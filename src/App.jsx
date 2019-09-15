@@ -18,22 +18,27 @@ import "./css/editProfile.css";
 
 class UnconnectedApp extends Component {
   renderLanding = () => {
-    //if (document.cookie === undefined) {
     return (
       <div>
         <Landing />
       </div>
     );
   };
-  // } else {
-  //   console.log("cookie", document.cookie);
 
   renderDashboard = () => {
-    return (
-      <div>
-        <Dashboard />
-      </div>
-    );
+    if (this.props.authenticated) {
+      return (
+        <div>
+          <Dashboard />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Landing />
+        </div>
+      );
+    }
   };
 
   render = () => {

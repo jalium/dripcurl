@@ -12,9 +12,7 @@ let reducer = (state, action) => {
   if (action.type === "user") {
     return {
       ...state,
-      username: action.user,
-      cookie: action.cookie,
-      frontendPath: action.frontendPath
+      username: action.username
     };
   }
   if (action.type === "login") {
@@ -51,7 +49,7 @@ const store = createStore(
   reducer,
   {
     allUsers: [],
-    username: undefined,
+    username: "",
     authenticated: false,
     cookie: undefined,
     pattern: "",
