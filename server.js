@@ -11,11 +11,11 @@ reloadMagic(app);
 
 let sessions = {};
 let dbo = undefined;
-/*
+
 let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
-*/
-let url = "mongodb://localhost:27017/MyDb";
+
+// let url = "mongodb://localhost:27017/MyDb";
 MongoClient.connect(
   url,
   { useNewUrlParser: true, useUnifiedTopology: true },
