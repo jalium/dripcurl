@@ -35,19 +35,7 @@ app.use("/curlImages", express.static(__dirname + "/curlImages"));
 // Your endpoints go after this line
 app.use("/uploads", express.static("uploads"));
 
-let createCookie = (username, req, res) => {
-  if (req.cookies.cookieId === undefined) {
-    let generatedId = () => {
-      return "" + Math.floor(Math.random() * 100000000);
-    };
-    let sessionId = generatedId();
-    sessions[sessionId] = username;
-    res.cookie("cookieId", sessionId);
-    return sessionId;
-  } else {
-    return req.cookies.cookieId;
-  }
-};
+let createCookie = (username, req, res) => {};
 
 app.post("/signup", upload.none(), (req, res) => {
   console.log("POST to /signup");
@@ -66,7 +54,14 @@ app.post("/signup", upload.none(), (req, res) => {
         email: email,
         password: pwd
       });
-      let sessionId = createCookie(name, req, res);
+
+      let generatedId = () => {
+        return "" + Math.floor(Math.random() * 100000000);
+      };
+      let sessionId = generatedId();
+      sessions[sessionId] = name;
+      res.cookie("cookieId", sessionId);
+
       console.log("sessionId in login", sessionId);
       dbo
         .collection("curlInfo")
@@ -95,8 +90,15 @@ app.post("/login", upload.none(), async (req, res) => {
   let name = req.body.username;
   let pwd = req.body.password;
 
-  let sessionId = await createCookie(name, req, res);
-  dbo.collection("users").findOne({ username: username }, (err, user) => {
+  if (req.cookies.cookieId === undefined) {
+    let generatedId = () => {
+      return "" + Math.floor(Math.random() * 100000000);
+    };
+    let sessionId = generatedId();
+    sessions[sessionId] = name;
+    res.cookie("cookieId", sessionId);
+  }
+  dbo.collection("users").findOne({ username: name }, (err, user) => {
     if (err) {
       console.log("/login error", err);
       res.send(JSON.stringify({ success: false }));
@@ -106,102 +108,99 @@ app.post("/login", upload.none(), async (req, res) => {
       res.send(JSON.stringify({ success: false }));
       return;
     }
-    if (user.password === password) {
+    if (user.password === pwd) {
+      dbo.collection("curlInfo").findOne({ username: name }, (err, info) => {
+        console.log("cookies match?", info.cookie, req.cookies.cookieId);
+        if (err) {
+          console.log("/login error", err);
+          res.send(JSON.stringify({ success: false }));
+        } else if (info.cookie !== req.cookies.cookieId) {
+          console.log("cookies don't match");
+          dbo.collection("curlInfo").updateOne(
+            { username: name },
+            {
+              $set: {
+                cookie: sessionId
+              }
+            }
+          );
+          sessions[info.cookie] = info.username;
+          currentUser = {
+            success: true,
+            username: info.username,
+            cookie: info.cookie,
+            pattern: info.pattern,
+            texture: info.texture,
+            porosity: info.porosity,
+            shampoo: info.shampoo,
+            conditioner: info.conditioner,
+            leaveIn: info.leaveIn,
+            treatments: info.treatments,
+            stylers: info.stylers,
+            frontendPath: info.frontendPath
+          };
+          console.log("current", currentUser);
+        } else if (info.cookie === req.cookies.cookieId) {
+          console.log("cookies match");
+          sessions[info.cookie] = info.username;
+          currentUser = {
+            success: true,
+            username: info.username,
+            cookie: info.cookie,
+            pattern: info.pattern,
+            texture: info.texture,
+            porosity: info.porosity,
+            shampoo: info.shampoo,
+            conditioner: info.conditioner,
+            leaveIn: info.leaveIn,
+            treatments: info.treatments,
+            stylers: info.stylers,
+            frontendPath: info.frontendPath
+          };
+        }
+      });
       dbo
         .collection("curlInfo")
-        .findOne({ username: username }, (err, info) => {
-          console.log("cookies match?", info.cookie, req.cookies.cookieId);
+        .find({})
+        .toArray((err, files) => {
           if (err) {
-            console.log("/login error", err);
+            return console.dir(err);
+          }
+          if (!files || files.length === 0 || err) {
+            console.log("no users");
             res.send(JSON.stringify({ success: false }));
-          } else if (info.cookie !== req.cookies.cookieId) {
-            console.log("cookies don't match");
-            dbo.collection("curlInfo").updateOne(
-              { username: username },
-              {
-                $set: {
-                  cookie: sessionId
-                }
-              }
+          } else {
+            files.forEach(file => {
+              userData[count++] = {
+                username: file.username,
+                profilePic: file.frontendPath,
+                type: [
+                  {
+                    pattern: file.pattern,
+                    texture: file.texture,
+                    porosity: file.porosity
+                  }
+                ],
+                products: [
+                  {
+                    shampoo: file.shampoo,
+                    conditioner: file.conditioner,
+                    leaveIn: file.leaveIn,
+                    treatments: file.treatments,
+                    stylers: file.stylers
+                  }
+                ]
+              };
+            });
+            res.send(
+              JSON.stringify({ currentUser: currentUser, userData: userData })
             );
-            sessions[info.cookie] = info.username;
-            currentUser = {
-              success: true,
-              username: info.username,
-              cookie: info.cookie,
-              pattern: info.pattern,
-              texture: info.texture,
-              porosity: info.porosity,
-              shampoo: info.shampoo,
-              conditioner: info.conditioner,
-              leaveIn: info.leaveIn,
-              treatments: info.treatments,
-              stylers: info.stylers,
-              frontendPath: info.frontendPath
-            };
-            console.log("current", currentUser);
-            return currentUser;
-          } else if (info.cookie === req.cookies.cookieId) {
-            console.log("cookies match");
-            sessions[info.cookie] = info.username;
-            currentUser = {
-              success: true,
-              username: info.username,
-              cookie: info.cookie,
-              pattern: info.pattern,
-              texture: info.texture,
-              porosity: info.porosity,
-              shampoo: info.shampoo,
-              conditioner: info.conditioner,
-              leaveIn: info.leaveIn,
-              treatments: info.treatments,
-              stylers: info.stylers,
-              frontendPath: info.frontendPath
-            };
           }
         });
     } else {
       res.send(JSON.stringify({ success: false }));
     }
   });
-
-  dbo
-    .collection("curlInfo")
-    .find({})
-    .toArray((err, files) => {
-      if (err) {
-        return console.dir(err);
-      }
-      if (!files || files.length === 0 || err) {
-        console.log("no users");
-        res.send(JSON.stringify({ success: false }));
-      } else {
-        files.forEach(file => {
-          userData[count++] = {
-            username: file.username,
-            profilePic: file.frontendPath,
-            type: [
-              {
-                pattern: file.pattern,
-                texture: file.texture,
-                porosity: file.porosity
-              }
-            ],
-            products: [
-              {
-                shampoo: file.shampoo,
-                conditioner: file.conditioner,
-                leaveIn: file.leaveIn,
-                treatments: file.treatments,
-                stylers: file.stylers
-              }
-            ]
-          };
-        });
-      }
-    });
-
-  res.send(JSON.stringify({ currentUser: currentUser, userData: userData }));
 });
 
 app.post("/curlType", upload.none(), (req, res) => {
