@@ -87,6 +87,7 @@ app.post("/login", upload.none(), async (req, res) => {
   let count = 0;
   let currentUser = {};
   let userData = [];
+  let sessionId = "";
   let name = req.body.username;
   let pwd = req.body.password;
 
@@ -94,7 +95,7 @@ app.post("/login", upload.none(), async (req, res) => {
     let generatedId = () => {
       return "" + Math.floor(Math.random() * 100000000);
     };
-    let sessionId = generatedId();
+    sessionId = generatedId();
     sessions[sessionId] = name;
     res.cookie("cookieId", sessionId);
   }

@@ -58,9 +58,9 @@ class UnconnectedFilter extends Component {
             type="checkbox"
             name={filter}
             onChange={this.onFilterChange}
-            value={this.state.filters[filter]}
+            value={this.state.filter[filter]}
           />
-          <label key={i}> {texture}</label>
+          <label key={i}> {filter}</label>
         </div>
       );
     });
@@ -71,16 +71,7 @@ class UnconnectedFilter extends Component {
         <ul>
           <li>
             <button className="btn-drop">Texture</button>
-            {this.renderTextureFilter()}
-          </li>
-          <li>
-            <button className="btn-drop">Porosity</button>
-            <input type="checkbox" id="high" value="high" />
-            <label htmlFor="high">high</label>
-            <input type="checkbox" id="medium" value="medium" />
-            <label htmlFor="medium">medium</label>
-            <input type="checkbox" id="low" value="low" />
-            <label htmlFor="low">low</label>
+            {this.renderFilter()}
           </li>
         </ul>
       </div>
