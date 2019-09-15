@@ -33,7 +33,8 @@ class UnconnectedLogin extends Component {
     if (body.currentUser.success) {
       this.props.dispatch({
         type: "user",
-        username: body.currentUser.username
+        username: body.currentUser.username,
+        frontendPath: body.currentUser.frontendPath
       }),
         this.props.dispatch({
           type: "curlType",

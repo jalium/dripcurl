@@ -12,7 +12,8 @@ let reducer = (state, action) => {
   if (action.type === "user") {
     return {
       ...state,
-      username: action.username
+      username: action.username,
+      frontendPath: action.frontendPath
     };
   }
   if (action.type === "login") {
@@ -42,6 +43,12 @@ let reducer = (state, action) => {
       filterQuery: action.filter
     };
   }
+  if (action.type === "search") {
+    return {
+      ...state,
+      searchQuery: action.searchQuery
+    };
+  }
   return state;
 };
 
@@ -61,7 +68,8 @@ const store = createStore(
     treatments: "",
     stylers: "",
     frontendPath: "",
-    filterQuery: []
+    filterQuery: [],
+    searchQuery: ""
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

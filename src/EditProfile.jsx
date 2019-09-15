@@ -76,8 +76,7 @@ class UnconnectedEditProfile extends Component {
     if (body.success) {
       this.props.dispatch({
         type: "user",
-        username: body.username,
-        cookie: this.props.cookie,
+        username: this.props.username,
         frontendPath: body.frontendPath
       });
       this.props.history.push("/profile");

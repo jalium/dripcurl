@@ -8,6 +8,7 @@ import CurlType from "./CurlType.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Profile from "./Profile.jsx";
 import EditProfile from "./EditProfile.jsx";
+import SearchResult from "./SearchResult.jsx"
 import "./css/Lapa.css";
 import "./css/main.css";
 import "./css/signup.css";
@@ -51,6 +52,7 @@ class UnconnectedApp extends Component {
         <Route exact={true} path="/dashboard" render={this.renderDashboard} />
         <Route exact={true} path="/profile" component={Profile} />
         <Route exact={true} path="/editProfile" component={EditProfile} />
+        <Route exact={true} path="/searchResult" component={SearchResult} />
       </BrowserRouter>
     );
   };

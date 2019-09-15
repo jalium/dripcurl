@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Search from "./Search.jsx";
 
-class UnconnectedFilterUsers extends Component {
+class UnconnectedSearchUsername extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHidden: true,
-      searchQuery: ""
+      isHidden: true
     };
   }
   toggleHidden() {
@@ -19,24 +19,18 @@ class UnconnectedFilterUsers extends Component {
     return (
       <div>
         <button class="btn-link" onClick={this.toggleHidden.bind(this)}>
-          Search for User
+          Search For Username
         </button>
-        {!this.state.isHidden && <Child />}
+        {!this.state.isHidden && <Search allUsers={this.props.allUsers} />}
       </div>
     );
   };
 }
-
-const Child = () => (
-  <div>
-    <input type="text" placeholder="search..." />
-  </div>
-);
 
 let mapStateToProps = st => {
   return {
     authenticated: st.authenticated
   };
 };
-let FilterUsers = connect(mapStateToProps)(UnconnectedFilterUsers);
-export default FilterUsers;
+let SearchUsername = connect(mapStateToProps)(UnconnectedSearchUsername);
+export default SearchUsername;

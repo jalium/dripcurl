@@ -256,6 +256,7 @@ app.post("/editProfile", upload.single("profilePic"), (req, res) => {
         );
         let currentUser = {
           success: true,
+          username: username,
           frontendPath: frontendPath
         };
         res.send(JSON.stringify(currentUser));

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import DashProfile from "./DashProfile.jsx";
 import FilterUsers from "./FilterUsers.jsx";
+import SearchUsername from "./SearchUsername.jsx";
 
 class UnconnectedDashboard extends Component {
   constructor(props) {
@@ -36,7 +37,9 @@ class UnconnectedDashboard extends Component {
               <li>
                 <FilterUsers />
               </li>
-              <li>search users</li>
+              <li>
+                <SearchUsername />
+              </li>
               <li>
                 <button className="btn-link" onClick={this.handleLogout}>
                   Logout
@@ -56,6 +59,7 @@ class UnconnectedDashboard extends Component {
           {this.props.allUsers
             .filter(user => {
               return (
+                user.username !== this.props.username &&
                 user.type[0].pattern === this.props.pattern &&
                 user.type[0].texture === this.props.texture &&
                 user.type[0].porosity === this.props.porosity
