@@ -15,7 +15,7 @@ let dbo = undefined;
 // let url =
 //   "mongodb://heroku_nv1f7lzn:udvhaealq8o68iq85h3nh061tu@ds127490.mlab.com:27490/heroku_nv1f7lzn";
 
-let url = "mongodb://<jalium>:<nel1234>@ds127490.mlab.com:27490";
+let url = "mongodb://jalium:nel1234@ds127490.mlab.com:27490";
 
 // let url = "mongodb://localhost:27017/MyDb";
 
