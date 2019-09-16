@@ -21,14 +21,15 @@ let url =
 // let url = "mongodb://localhost:27017/MyDb";
 
 MongoClient.connect(
-  url,
+  process.env.MONGODB_URI,
+  //url,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, db) => {
     if (err) {
       return console.dir(err);
     }
     console.log("Connected to db");
-    dbo = db.db("heroku_nv1f7lzn");
+    dbo = db.db("curl");
   }
 );
 
