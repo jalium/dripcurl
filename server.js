@@ -13,9 +13,10 @@ let sessions = {};
 let dbo = undefined;
 
 let url =
-  "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb://heroku_nv1f7lzn:udvhaealq8o68iq85h3nh061tu@ds127490.mlab.com:27490/heroku_nv1f7lzn";
 
 // let url = "mongodb://localhost:27017/MyDb";
+
 MongoClient.connect(
   url,
   { useNewUrlParser: true, useUnifiedTopology: true },
