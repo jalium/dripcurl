@@ -28,7 +28,7 @@ MongoClient.connect(
       return console.dir(err);
     }
     console.log("Connected to db");
-    dbo = db.db("curl");
+    dbo = db.db("heroku_nv1f7lzn");
   }
 );
 
