@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import DashProfile from "./DashProfile.jsx";
-import FilterUsers from "./FilterUsers.jsx";
 import SearchUsername from "./SearchUsername.jsx";
 
 class UnconnectedDashboard extends Component {
@@ -33,9 +32,6 @@ class UnconnectedDashboard extends Component {
             <ul>
               <li>
                 <Link to="/profile">Profile</Link>
-              </li>
-              <li>
-                <FilterUsers />
               </li>
               <li>
                 <SearchUsername />

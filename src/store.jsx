@@ -37,12 +37,6 @@ let reducer = (state, action) => {
       stylers: action.stylers
     };
   }
-  if (action.type === "filter") {
-    return {
-      ...state,
-      filterQuery: action.filter
-    };
-  }
   if (action.type === "search") {
     return {
       ...state,
@@ -68,7 +62,6 @@ const store = createStore(
     treatments: "",
     stylers: "",
     frontendPath: "",
-    filterQuery: [],
     searchQuery: ""
   },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
