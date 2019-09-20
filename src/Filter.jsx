@@ -21,11 +21,10 @@ class UnconnectedFilter extends Component {
         low: false
       }
     };
-    this.onFilter = this.onFilterChange.bind(this);
     //this.onPorosityChange = this.onPorosityChange.bind(this)
   }
 
-  onFilterChange(evt) {
+  onFilterChange = (evt) => {
     let value = evt.target.checked;
     let name = evt.target.name;
     let updateFilters = Object.assign({}, this.state.textures, {

@@ -9,16 +9,16 @@ class UnconnectedSearchUsername extends Component {
       isHidden: true
     };
   }
-  toggleHidden() {
+  toggleHidden = () => {
     this.setState({
       isHidden: !this.state.isHidden
     });
-  }
+  };
 
   render = () => {
     return (
       <div>
-        <button class="btn-link" onClick={this.toggleHidden.bind(this)}>
+        <button class="btn-link" onClick={this.toggleHidden}>
           Search For Username
         </button>
         {!this.state.isHidden && <Search allUsers={this.props.allUsers} />}

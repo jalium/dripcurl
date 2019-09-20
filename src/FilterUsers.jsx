@@ -9,16 +9,16 @@ class UnconnectedFilterUsers extends Component {
       isHidden: true
     };
   }
-  toggleHidden() {
+  toggleHidden = () => {
     this.setState({
       isHidden: !this.state.isHidden
     });
-  }
+  };
 
   render = () => {
     return (
       <div>
-        <button class="btn-link" onClick={this.toggleHidden.bind(this)}>
+        <button class="btn-link" onClick={this.toggleHidden}>
           Filter Hairtypes
         </button>
         {!this.state.isHidden && <Filter allUsers={this.props.allUsers} />}

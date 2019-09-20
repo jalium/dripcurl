@@ -9,25 +9,21 @@ class UnconnectedCurlType extends Component {
   constructor(props) {
     super(props);
     this.state = { currentStep: 1, pattern: "", texture: "", porosity: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleHairType = this.handleHairType.bind(this);
-    this._next = this._next.bind(this);
-    this._prev = this._prev.bind(this);
   }
 
-  _next() {
+  _next = () => {
     let currentStep = this.state.currentStep;
     currentStep = currentStep >= 2 ? 3 : currentStep + 1;
     console.log(currentStep);
     this.setState({ currentStep: currentStep });
-  }
+  };
 
-  _prev() {
+  _prev = () => {
     let currentStep = this.state.currentStep;
     currentStep = currentStep <= 1 ? 1 : currentStep - 1;
     console.log(currentStep);
     this.setState({ currentStep: currentStep });
-  }
+  };
 
   get previousButton() {
     let currentStep = this.state.currentStep;
@@ -69,20 +65,20 @@ class UnconnectedCurlType extends Component {
     return null;
   }
 
-  handleHairType(evt) {
+  handleHairType = evt => {
     evt.preventDefault();
     const { name, alt } = evt.target;
     console.log("type target: " + evt.target.alt);
     this.setState({ [name]: alt });
-  }
+  };
 
-  handleChange(evt) {
+  handleChange = evt => {
     const { name, value } = evt.target;
     console.log("target: " + evt.target.value);
     this.setState({
       [name]: value
     });
-  }
+  };
 
   handleSubmit = async evt => {
     evt.preventDefault();
