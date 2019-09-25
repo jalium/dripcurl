@@ -13,7 +13,7 @@
   border: none;
   margin: 0;
   padding: 0;
-  font-family: "ransom-sans", sans-serif;
+  font-family: "raleway", sans-serif;
   font-size: 18px;
   line-height: 24px;
   text-rendering: geometricPrecision;
@@ -47,12 +47,13 @@
   outline-width: 0;
 }
 
+/*add for filter function 
 .btn-drop {
   display: block;
   background: none !important;
   border: none;
   padding: 0px;
-  font-family: "ransom-sans", sans-serif;
+  font-family: "raleway", sans-serif;
   font-size: 14px;
   line-height: 24px;
   text-rendering: geometricPrecision;
@@ -62,6 +63,8 @@
   cursor: pointer;
 }
 
+
 .dropdown ul {
   padding: 10px;
 }
+*/

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class UnconnectedSignup extends Component {
   constructor(props) {
@@ -103,6 +103,10 @@ class UnconnectedSignup extends Component {
             />
             <input className="btn" type="submit" value="Find your curl type" />
           </form>
+          <div className="link-login">
+            <p>Already have an account?</p>
+            <Link to="/login">Login</Link>
+          </div>
         </div>
       </div>
     );

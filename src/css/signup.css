@@ -1,36 +1,36 @@
 .signup-container {
   background-color: #e0f391;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   overflow-y: auto;
 }
 
 .signup-header {
   padding: 50px;
-  font-family: "calluna";
+  font-family: "raleway", sans-serif;
   font-size: "300px";
   text-align: center;
 }
 
 .signup {
   position: relative;
-  margin: 40px auto;
-  max-width: 130px;
-  font-family: "calluna";
-  font-size: 16px;
-  padding: 25px 208px 47px 30px;
+  justify-content: center;
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 300px;
   border-radius: 10px;
   background: white;
 }
 
 .signup input {
-  display: block;
-  width: 208%;
-  padding: 20px;
-  font-family: "ransom-sans", sans-serif;
+  width: 250px;
+  margin: 2px;
+  padding: 18px 20px;
+  font-family: "raleway", sans-serif;
   font-size: 14px;
-  outline: 0;
+  text-align: center;
+  outline-color: #e0f391;
 }
 
 .no-border {
@@ -38,8 +38,6 @@
 }
 
 .signup label {
-  clear: left;
-  float: left;
   width: 300px;
   text-align: center;
   margin-bottom: 5px;
@@ -52,8 +50,6 @@
 }
 
 .signup input.step-one {
-  display: block;
-  width: 208%;
   padding: 20px;
   margin: 10px;
   font-family: "ransom-sans", sans-serif;
@@ -92,18 +88,26 @@
 }
 
 .btn {
-  border-radius: 2px;
+  margin-top: 30px;
   color: white;
   background: black;
   border-radius: 3px;
+  text-transform: uppercase;
+  outline: 0;
+  cursor: pointer;
 }
 
 .btn-submit {
-  height: 30px;
-  border-radius: 2px;
+  padding: 10px;
+  margin: 3px;
+  width: 100px;
+  height: 37px;
   color: white;
   background: black;
   border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: 0;
 }
 
 .btn-back {
@@ -112,6 +116,7 @@
   color: white;
   background: black;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .btn-next {
@@ -120,4 +125,5 @@
   color: white;
   background: black;
   border-radius: 3px;
+  cursor: pointer;
 }

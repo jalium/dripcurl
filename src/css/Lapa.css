@@ -52,8 +52,8 @@ a:hover {
 .main-menu p {
   width: 525px;
   padding-left: 35px;
-  font-family: "calluna";
-  font-weight: normal;
+  font-family: "raleway", sans-serif;
+  font-weight: bold;
   font-style: normal;
   font-size: 20px;
   line-height: 22px;
@@ -62,7 +62,7 @@ a:hover {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  font-family: "ransom-sans", sans-serif;
+  font-family: "raleway", sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 18px;
@@ -99,14 +99,6 @@ a:hover {
 .main-menu ul li:last-of-type a {
   margin-right: 0;
 }
-/*! CSS Used fontfaces */
-/* @font-face {
-  font-family: "callunaregular";
-  src: url("calluna-regular-webfont.woff2") format("woff2"),
-    url("calluna-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-} */
 
 .dripcurl-logo {
   margin-top: 0px;

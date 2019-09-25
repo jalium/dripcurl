@@ -2,7 +2,7 @@
   position: relative;
   margin: 40px auto;
   max-width: 130px;
-  font-family: "calluna";
+  font-family: "raleway", sans-serif;
   font-size: 16px;
   padding: 25px 208px 47px 30px;
   border-radius: 10px;
@@ -30,14 +30,6 @@
   margin-bottom: 15px;
   font-size: 28px;
   font-weight: 800;
-}
-
-.edit-btn {
-  color: white;
-  background: black;
-  margin-top: 10px;
-  margin-left: 11px;
-  border-radius: 3px;
 }
 
 #flex {

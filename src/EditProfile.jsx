@@ -141,7 +141,7 @@ class UnconnectedEditProfile extends Component {
                 onChange={this.handleStylersInputChange}
               />
               <input
-                className="edit-btn"
+                className="btn-submit"
                 type="submit"
                 value="Update Products"
               />

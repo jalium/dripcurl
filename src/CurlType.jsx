@@ -29,7 +29,7 @@ class UnconnectedCurlType extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
-        <button className="btn-back" type="button" onClick={this._prev}>
+        <button className="btn-submit" type="button" onClick={this._prev}>
           Go Back
         </button>
       );
@@ -41,7 +41,7 @@ class UnconnectedCurlType extends Component {
     let currentStep = this.state.currentStep;
     if (currentStep < 3) {
       return (
-        <button className="btn-next" type="button" onClick={this._next}>
+        <button className="btn-submit" type="button" onClick={this._next}>
           Next
         </button>
       );
@@ -58,7 +58,7 @@ class UnconnectedCurlType extends Component {
           type="submit"
           onClick={this.handleSubmit}
         >
-          Find your hair community
+          Enter Site!
         </button>
       );
     }

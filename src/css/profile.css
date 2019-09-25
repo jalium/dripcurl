@@ -2,7 +2,7 @@
   background-color: white;
   border-radius: 4px;
   max-width: 500px;
-  font-family: calluna;
+  font-family: raleway, sans-serif;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -10,7 +10,9 @@
 
 .profile p {
   text-align: center;
-  text-decoration-color: #e0f391;
+  text-transform: uppercase;
+  padding: 15px;
+  font-size: 20px;
 }
 
 .profile img {
